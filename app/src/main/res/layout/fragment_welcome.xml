@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background1"
+    tools:context=".fragments.WelcomeFragment">
+
+
+    <!-- Auto layout, variables, and unit scale are not yet supported -->
+
+    <ImageView
+        android:id="@+id/nextbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="69dp"
+        android:clickable="true"
+        android:src="@drawable/buttonnext"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/previewbutton"
+        android:layout_width="113dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginBottom="80dp"
+        android:clickable="true"
+        android:src="@drawable/frame"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+    <ImageView
+        android:id="@+id/welcomeimage"
+        android:layout_width="300dp"
+        android:layout_height="550dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/welcome1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

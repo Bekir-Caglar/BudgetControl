@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/welcomeFragment">
+
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.bekircaglar.budgetcontrol.fragments.WelcomeFragment"
+        android:label="fragment_welcome"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_welcome2Fragment2"
+            app:destination="@id/welcome2Fragment2"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/welcomeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcome3Fragment"
+        android:name="com.bekircaglar.budgetcontrol.fragments.Welcome3Fragment"
+        android:label="Welcome3Fragment"
+        tools:layout="@layout/fragment_welcome3" >
+        <action
+            android:id="@+id/action_welcome3Fragment_to_welcome4Fragment"
+            app:destination="@id/welcome4Fragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/welcome3Fragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_welcome3Fragment_to_welcome2Fragment2"
+            app:destination="@id/welcome2Fragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcome4Fragment"
+        android:name="com.bekircaglar.budgetcontrol.fragments.Welcome4Fragment"
+        android:label="Welcome4Fragment"
+        tools:layout="@layout/fragment_welcome4" >
+        <action
+            android:id="@+id/action_welcome4Fragment_to_welcome3Fragment"
+            app:destination="@id/welcome3Fragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action
+            android:id="@+id/action_welcome4Fragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/welcome4Fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcome2Fragment2"
+        android:name="com.bekircaglar.budgetcontrol.fragments.Welcome2Fragment"
+        android:label="Welcome2Fragment"
+        tools:layout="@layout/fragment_welcome2" >
+        <action
+            android:id="@+id/action_welcome2Fragment2_to_welcome3Fragment"
+            app:destination="@id/welcome3Fragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/welcome2Fragment2"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_welcome2Fragment2_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.bekircaglar.budgetcontrol.fragments.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+
+    />
+</navigation>

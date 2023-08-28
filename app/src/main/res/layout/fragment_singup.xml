@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background1"
+    tools:context=".fragments.SingupFragment">
+
+
+    <TextView
+        android:id="@+id/label3"
+        android:layout_width="320dp"
+        android:layout_height="24dp"
+        android:gravity="top"
+        android:lineSpacingExtra="8sp"
+        android:text="Email"
+        android:textAppearance="@style/label"
+        android:translationY="-3.8sp"
+        tools:layout_editor_absoluteX="45dp"
+        tools:layout_editor_absoluteY="218dp" />
+
+    <EditText
+        android:id="@+id/editTextTextEmailAddress2"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/myrect"
+        android:elevation="2dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintTop_toBottomOf="@+id/label3"
+        tools:layout_editor_absoluteX="45dp" />
+
+    <EditText
+        android:id="@+id/editTextNumberPassword2"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/myrect"
+        android:elevation="2dp"
+        android:ems="10"
+        android:inputType="numberPassword"
+        app:layout_constraintTop_toBottomOf="@+id/label4"
+        tools:layout_editor_absoluteX="45dp" />
+
+    <TextView
+        android:id="@+id/label4"
+        android:layout_width="320dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="25dp"
+        android:gravity="top"
+        android:lineSpacingExtra="8sp"
+        android:text="Password"
+        android:textAppearance="@style/label"
+        android:translationY="-3.8sp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextText2"
+        tools:layout_editor_absoluteX="45dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/singup"
+        tools:layout_editor_absoluteX="151dp"
+        tools:layout_editor_absoluteY="112dp" />
+
+    <TextView
+        android:id="@+id/label5"
+        android:layout_width="155dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="25dp"
+        android:gravity="top"
+        android:lineSpacingExtra="8sp"
+        android:text="First Name"
+        android:textAppearance="@style/label"
+        android:translationY="-3.8sp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress2"
+        tools:layout_editor_absoluteX="45dp" />
+
+    <EditText
+        android:id="@+id/editTextText2"
+        android:layout_width="155dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/myrect"
+        android:elevation="2dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/label6"
+        tools:layout_editor_absoluteX="210dp" />
+
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="155dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/myrect"
+        android:elevation="2dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/label5"
+        tools:layout_editor_absoluteX="45dp" />
+
+    <TextView
+        android:id="@+id/label6"
+        android:layout_width="155dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="25dp"
+        android:gravity="top"
+        android:lineSpacingExtra="8sp"
+        android:text="Last Name"
+        android:textAppearance="@style/label"
+        android:translationY="-3.8sp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress2"
+        tools:layout_editor_absoluteX="210dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="71dp"
+        android:src="@drawable/create"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumberPassword2"
+        tools:layout_editor_absoluteX="47dp" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:src="@drawable/singin"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        tools:layout_editor_absoluteX="134dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
