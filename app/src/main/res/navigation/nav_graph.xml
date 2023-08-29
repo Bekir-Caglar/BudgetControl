@@ -78,7 +78,31 @@
         android:id="@+id/loginFragment"
         android:name="com.bekircaglar.budgetcontrol.fragments.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_singupFragment"
+            app:destination="@id/singupFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_budgetFragment"
+            app:destination="@id/budgetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/singupFragment"
+        android:name="com.bekircaglar.budgetcontrol.fragments.SingupFragment"
+        android:label="fragment_singup"
+        tools:layout="@layout/fragment_singup" >
+        <action
+            android:id="@+id/action_singupFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_singupFragment_to_budgetFragment"
+            app:destination="@id/budgetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/budgetFragment"
+        android:name="com.bekircaglar.budgetcontrol.fragments.BudgetFragment"
+        android:label="fragment_budget"
+        tools:layout="@layout/fragment_budget" />
 
     />
 </navigation>
