@@ -53,12 +53,12 @@
         android:layout_height="134dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="33dp"
-        android:orientation="vertical"
         android:background="@drawable/myrect"
         android:elevation="10dp"
+        android:gravity="center"
+        android:orientation="vertical"
         android:paddingHorizontal="36dp"
         android:paddingVertical="32dp"
-        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,9 +70,9 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingBottom=""
-            android:textSize="25dp"
+            android:text="Total Balance"
             android:textColor="#003829"
-            android:text="Total Balance" />
+            android:textSize="25dp" />
 
         <TextView
             android:id="@+id/textView5"
@@ -80,34 +80,33 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="10dp"
-            android:textSize="22dp"
+            android:text="3500€ "
             android:textColor="#003829"
-            android:text="3500€ " />
+            android:textSize="22dp" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        android:layout_height="200dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linear"
-        app:layout_constraintVertical_bias="1.0" />
+        tools:layout_editor_absoluteY="326dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/shape0"
+        android:layout_marginTop="25dp"
 
+        android:background="@drawable/shape0"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear">
 
         <TextView
             android:id="@+id/textView9"
@@ -129,5 +128,35 @@
 
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView2"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginBottom="36dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        tools:layout_editor_absoluteX="0dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
