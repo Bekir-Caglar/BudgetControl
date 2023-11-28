@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="newExpenseFragment" type="com.bekircaglar.budgetcontrol.fragments.details.NewExpenseFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color"
+        tools:context=".fragments.details.NewExpenseFragment">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="320dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/white"
+            android:elevation="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/removeicon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editTextInput"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:ems="10"
+                android:hint="00,00"
+                android:inputType="number"
+                android:textColor="@color/number_color"
+                android:textSize="40dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+            <TextView
+                android:id="@+id/currencyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="Euro"
+                android:textColor="#2196F3"
+                android:textSize="26dp"
+                app:layout_constraintBottom_toBottomOf="@+id/editTextInput"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editTextInput" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Select account"
+            android:textColor="@color/info_text"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="invisible"
+            android:text="Note"
+            android:textColor="@color/info_text"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Select category"
+            android:textColor="@color/info_text"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/background_color"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView9"
+            app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+            <RelativeLayout
+                android:id="@+id/bankAccountButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_navi"
+                android:gravity="center"
+                android:onClick="@{() -> newExpenseFragment.selectBankAccountButton()}"
+                android:paddingHorizontal="10dp">
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bank Account"
+                    android:textColor="#344754" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cashAccountButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:background="@drawable/cash_nav"
+                android:gravity="center"
+                android:onClick="@{() -> newExpenseFragment.selectCashAccountButton()}"
+                android:paddingHorizontal="10dp">
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cash Account"
+                    android:textColor="#5C615E" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/textView19"
+            app:layout_constraintTop_toBottomOf="@+id/textView19">
+
+            <ImageView
+                android:id="@+id/imageViewApart"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/apartmenticon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageViewBeauty"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="18dp"
+                android:src="@drawable/beautiyicon"
+                app:layout_constraintStart_toEndOf="@+id/imageViewApart"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageViewCar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="18dp"
+                android:src="@drawable/caricon"
+                app:layout_constraintStart_toEndOf="@+id/imageViewBeauty"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageViewClothes"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="18dp"
+                android:src="@drawable/clothesicon"
+                app:layout_constraintStart_toEndOf="@+id/imageViewCar"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageViewPet"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="18dp"
+                android:src="@drawable/peticon"
+                app:layout_constraintStart_toEndOf="@+id/imageViewClothes"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageViewDonate"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/donateicon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewApart" />
+
+            <ImageView
+                android:id="@+id/imageViewHealth"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="18dp"
+                android:src="@drawable/healthicon"
+                app:layout_constraintStart_toEndOf="@+id/imageViewDonate"
+                app:layout_constraintTop_toTopOf="@+id/imageViewDonate" />
+
+            <ImageView
+                android:id="@+id/imageViewFood"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="18dp"
+                android:src="@drawable/foodicon"
+                app:layout_constraintStart_toEndOf="@+id/imageViewHealth"
+                app:layout_constraintTop_toTopOf="@+id/imageViewHealth" />
+
+            <ImageView
+                android:id="@+id/imageViewGift"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="18dp"
+                android:src="@drawable/gifticon"
+                app:layout_constraintStart_toEndOf="@+id/imageViewFood"
+                app:layout_constraintTop_toTopOf="@+id/imageViewFood" />
+
+            <ImageView
+                android:id="@+id/imageViewOther"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="18dp"
+                android:src="@drawable/othericon"
+                app:layout_constraintStart_toEndOf="@+id/imageViewGift"
+                app:layout_constraintTop_toTopOf="@+id/imageViewGift" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/textView21"
+            app:layout_constraintTop_toBottomOf="@+id/textView21">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/noteText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Add Note"
+                android:textColor="@color/info_text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/confrimButton"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="32dp"
+            android:onClick="@{() -> newExpenseFragment.confirmButton()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+            app:srcCompat="@drawable/confirmbutton" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

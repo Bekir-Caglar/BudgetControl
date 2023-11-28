@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="morePageFragment" type="com.bekircaglar.budgetcontrol.fragments.details.MorePageFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color"
+        tools:context=".fragments.details.MorePageFragment">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="240dp"
+            android:background="#D4F4E4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/yourNameText"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="Your Name"
+                android:textColor="#002117"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewpp" />
+
+            <TextView
+                android:id="@+id/yourEmailText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="8dp"
+                android:text="Your Email"
+                android:textColor="#707974"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/yourNameText" />
+
+            <ImageView
+                android:id="@+id/goProfileButton"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginEnd="50dp"
+                android:onClick="@{() -> morePageFragment.goProfilePageButton()}"
+                android:src="@drawable/arrrig"
+                app:layout_constraintBottom_toBottomOf="@+id/yourEmailText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/yourNameText" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageViewpp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="48dp"
+                android:src="@drawable/user"
+                android:elevation="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/settingsframe"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dashboardButton" />
+
+        <ImageView
+            android:id="@+id/helpText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:onClick='@{() -> morePageFragment.goHelpPageButton()}'
+            android:src="@drawable/helpframe"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+        <ImageView
+            android:id="@+id/accountsButton"
+            android:layout_width="319dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="72dp"
+            android:visibility="invisible"
+            android:onClick="@{() -> morePageFragment.goAccountButton()}"
+            android:src="@drawable/accountsframe"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.51"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+        <LinearLayout
+            android:id="@+id/dashboardButton"
+            android:layout_width="318dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="-30dp"
+            android:gravity="center"
+            android:onClick="@{() -> morePageFragment.goDashButton()}"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/accountsButton">
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="14dp"
+                android:src="@drawable/outline_dashboard_24" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:text="Dasboard"
+                android:textColor="#28433b"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
