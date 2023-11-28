@@ -3,4 +3,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="my_light_primary">#D4F4E4</color>
+    <color name="background_color">#f9fbf8</color>
+    <color name="toolbar_title">#003829</color>
+    <color name="light_text_color">#008768</color>
+    <color name="dark_text_color">#006C52</color>
+    <color name="number_color">#444745</color>
+    <color name="info_text">#707974</color>
+
 </resources>

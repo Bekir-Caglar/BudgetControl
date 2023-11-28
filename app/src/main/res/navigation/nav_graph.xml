@@ -3,106 +3,77 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/welcomeFragment">
+    app:startDestination="@id/budgetFragment">
 
-    <fragment
-        android:id="@+id/welcomeFragment"
-        android:name="com.bekircaglar.budgetcontrol.fragments.WelcomeFragment"
-        android:label="fragment_welcome"
-        tools:layout="@layout/fragment_welcome" >
-        <action
-            android:id="@+id/action_welcomeFragment_to_welcome2Fragment2"
-            app:destination="@id/welcome2Fragment2"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@id/welcomeFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/welcome3Fragment"
-        android:name="com.bekircaglar.budgetcontrol.fragments.Welcome3Fragment"
-        android:label="Welcome3Fragment"
-        tools:layout="@layout/fragment_welcome3" >
-        <action
-            android:id="@+id/action_welcome3Fragment_to_welcome4Fragment"
-            app:destination="@id/welcome4Fragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@id/welcome3Fragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_welcome3Fragment_to_welcome2Fragment2"
-            app:destination="@id/welcome2Fragment2" />
-    </fragment>
-    <fragment
-        android:id="@+id/welcome4Fragment"
-        android:name="com.bekircaglar.budgetcontrol.fragments.Welcome4Fragment"
-        android:label="Welcome4Fragment"
-        tools:layout="@layout/fragment_welcome4" >
-        <action
-            android:id="@+id/action_welcome4Fragment_to_welcome3Fragment"
-            app:destination="@id/welcome3Fragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
-        <action
-            android:id="@+id/action_welcome4Fragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/welcome4Fragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/welcome2Fragment2"
-        android:name="com.bekircaglar.budgetcontrol.fragments.Welcome2Fragment"
-        android:label="Welcome2Fragment"
-        tools:layout="@layout/fragment_welcome2" >
-        <action
-            android:id="@+id/action_welcome2Fragment2_to_welcome3Fragment"
-            app:destination="@id/welcome3Fragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@id/welcome2Fragment2"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_welcome2Fragment2_to_welcomeFragment"
-            app:destination="@id/welcomeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.bekircaglar.budgetcontrol.fragments.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_singupFragment"
-            app:destination="@id/singupFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_budgetFragment"
-            app:destination="@id/budgetFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/singupFragment"
-        android:name="com.bekircaglar.budgetcontrol.fragments.SingupFragment"
-        android:label="fragment_singup"
-        tools:layout="@layout/fragment_singup" >
-        <action
-            android:id="@+id/action_singupFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_singupFragment_to_budgetFragment"
-            app:destination="@id/budgetFragment" />
-    </fragment>
     <fragment
         android:id="@+id/budgetFragment"
-        android:name="com.bekircaglar.budgetcontrol.fragments.BudgetFragment"
+        android:name="com.bekircaglar.budgetcontrol.fragments.main.BudgetFragment"
         android:label="fragment_budget"
-        tools:layout="@layout/fragment_budget" />
+        tools:layout="@layout/fragment_budget" >
+        <action
+            android:id="@+id/action_budgetFragment_to_moreFragment"
+            app:destination="@id/moreFragment" />
+        <action
+            android:id="@+id/action_budgetFragment_to_moreFragment2"
+            app:destination="@id/moreFragment" />
+        <action
+            android:id="@+id/action_budgetFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/moreFragment"
+        android:name="com.bekircaglar.budgetcontrol.fragments.main.MoreFragment"
+        android:label="fragment_more"
+        tools:layout="@layout/fragment_more" >
+        <action
+            android:id="@+id/action_moreFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_moreFragment_to_budgetFragment"
+            app:destination="@id/budgetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.bekircaglar.budgetcontrol.fragments.main.AddFragment"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_add" >
+        <action
+            android:id="@+id/action_addFragment_to_budgetFragment"
+            app:destination="@id/budgetFragment" />
+        <action
+            android:id="@+id/action_addFragment_to_moreFragment"
+            app:destination="@id/moreFragment" />
+        <action
+            android:id="@+id/action_addFragment_to_newExpenseFragment"
+            app:destination="@id/newExpenseFragment" />
+        <action
+            android:id="@+id/action_addFragment_to_newIncomeFragment"
+            app:destination="@id/newIncomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newExpenseFragment"
+        android:name="com.bekircaglar.budgetcontrol.fragments.details.NewExpenseFragment"
+        android:label="NewExpenseFragment"
+        tools:layout="@layout/fragment_new_expense" >
 
-    />
+    <action
+            android:id="@+id/action_newExpenseFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_newExpenseFragment_to_budgetFragment"
+            app:destination="@id/budgetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newIncomeFragment"
+        android:name="com.bekircaglar.budgetcontrol.fragments.details.NewIncomeFragment"
+        android:label="NewIncomeFragment"
+        tools:layout="@layout/fragment_new_income" >
+
+        <action
+            android:id="@+id/action_newIncomeFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_newIncomeFragment_to_budgetFragment"
+            app:destination="@id/budgetFragment" />
+    </fragment>
 </navigation>
