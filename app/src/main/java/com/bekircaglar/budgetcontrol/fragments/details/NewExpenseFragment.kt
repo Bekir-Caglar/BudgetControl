@@ -15,6 +15,9 @@ import com.bekircaglar.budgetcontrol.model.BankModel
 import com.bekircaglar.budgetcontrol.util.switch
 import com.bekircaglar.budgetcontrol.viewmodel.NewExpenseFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import kotlin.math.exp
 
 @AndroidEntryPoint
@@ -61,7 +64,11 @@ class NewExpenseFragment : Fragment() {
 
 
     fun confirmButton(){
-        val date = "10.11.1938"
+
+        val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy")
+        val current = LocalDate.now().format(formatter)
+
+        val date = current.toString()
         val expensePrice = binding.editTextInput.text.toString()
 
         if (bankAccountType == null){
