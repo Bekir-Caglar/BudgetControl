@@ -45,14 +45,10 @@ class NewExpenseFragment : Fragment() {
         }
         viewModel.AccountsMoneyListM.observe(viewLifecycleOwner){
             var accountsMoneyList = it as ArrayList<AccountsMoney>
-
             bankAccountMoney = accountsMoneyList[0].bankMoney
             cashAccountMoney = accountsMoneyList[0].cashMoney
         }
-
-
         selectCatagory()
-
         return binding.root
     }
 
@@ -95,54 +91,30 @@ class NewExpenseFragment : Fragment() {
     }
 
     fun getCatagoryImage(){
-
-        if (categoryName == "Apart"){
-            categoryImg = R.drawable.apartmenticon
+        categoryImg = when(categoryName) {
+            "Apart" -> R.drawable.apartmenticon
+            "Beauty" -> R.drawable.beautiyicon
+            "Car" -> R.drawable.caricon
+            "Clothes" -> R.drawable.clothesicon
+            "Pet" -> R.drawable.peticon
+            "Donate" -> R.drawable.donateicon
+            "Health" -> R.drawable.healthicon
+            "Food" -> R.drawable.foodicon
+            "Gift" -> R.drawable.gifticon
+            "Other" -> R.drawable.othericon
+            else -> {R.drawable.othericon}
         }
-        else if(categoryName.equals("Beauty")){
-            categoryImg = R.drawable.beautiyicon
-        }
-        else if(categoryName.equals("Car")){
-            categoryImg = R.drawable.caricon
-        }
-        else if(categoryName.equals("Clothes")){
-            categoryImg = R.drawable.clothesicon
-        }
-        else if(categoryName.equals("Beauty")){
-            categoryImg = R.drawable.beautiyicon
-        }
-        else if(categoryName.equals("Pet")){
-            categoryImg = R.drawable.peticon
-        }
-        else if(categoryName.equals("Donate")){
-            categoryImg = R.drawable.donateicon
-        }
-        else if(categoryName.equals("Health")){
-            categoryImg = R.drawable.healthicon
-        }
-        else if(categoryName.equals("Food")){
-            categoryImg = R.drawable.foodicon
-        }
-        else if(categoryName.equals("Gift")){
-            categoryImg = R.drawable.gifticon
-        }
-        else if(categoryName.equals("Other")){
-            categoryImg = R.drawable.othericon
-        }
-
     }
 
     fun selectBankAccountButton() {
         viewModel.SelectBankAccountButton(binding)
         bankAccountType = "Bank"
-        println(bankAccountType)
 
     }
 
     fun selectCashAccountButton(){
         viewModel.SelectCashAccountButton(binding)
         bankAccountType = "Cash"
-        println(bankAccountType)
 
     }
     fun selectCatagory(){

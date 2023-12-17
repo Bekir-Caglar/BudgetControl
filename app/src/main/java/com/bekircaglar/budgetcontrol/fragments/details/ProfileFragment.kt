@@ -1,6 +1,7 @@
 package com.bekircaglar.budgetcontrol.fragments.details
 
 import android.Manifest
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -38,6 +39,7 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Base64
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -71,8 +73,10 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val myCalendar = Calendar.getInstance()
 
-        viewModel.userDataList.observe(viewLifecycleOwner){
+
+        viewModel.userDataList.observe(viewLifecycleOwner) {
             userDataList = it as ArrayList<UserData>
             binding.userName.text = userDataList[0].user_name
             binding.userMail.text = userDataList[0].user_email
@@ -80,10 +84,10 @@ class ProfileFragment : Fragment() {
 
             val decodedString: ByteArray = Base64.getDecoder().decode(encodedImage)
             if (decodedString != null) {
-                val decodedByte: Bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                val decodedByte: Bitmap =
+                    BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
                 binding.userImage.setImageBitmap(decodedByte)
-            }
-            else{
+            } else {
                 binding.userImage.setImageResource(R.drawable.user)
             }
 
@@ -101,7 +105,7 @@ class ProfileFragment : Fragment() {
             val newUserDob = binding.enterDob.text.toString()
 
             // Kullanıcı bilgilerini güncelle
-            viewModel.updateUser(newUsername, newUserEmail,newUserPhone,encodedImage,newUserDob)
+            viewModel.updateUser(newUsername, newUserEmail, newUserPhone, encodedImage, newUserDob)
             Toast.makeText(requireContext(), "Updated", Toast.LENGTH_LONG).show()
         }
 
@@ -109,24 +113,32 @@ class ProfileFragment : Fragment() {
 
         binding.userImage.setOnClickListener {
             if (Build.VERSION.SDK_INT >= 33) {
-                if (ContextCompat.checkSelfPermission(requireContext(),android.Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(
+                        requireContext(),
+                        android.Manifest.permission.READ_MEDIA_IMAGES
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
 
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.READ_MEDIA_IMAGES)) {
-                        Snackbar.make(binding.root, "Need Permission", Snackbar.LENGTH_INDEFINITE
-                        ).setAction("Give Permission",View.OnClickListener {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(
+                            requireActivity(),
+                            Manifest.permission.READ_MEDIA_IMAGES
+                        )
+                    ) {
+                        Snackbar.make(
+                            binding.root, "Need Permission", Snackbar.LENGTH_INDEFINITE
+                        ).setAction("Give Permission", View.OnClickListener {
                             permissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
 
                         }).show()
 
 
-                    }
-                    else {
+                    } else {
                         permissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
 
                     }
-                }
-                else {
-                    val intenttogallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                } else {
+                    val intenttogallery =
+                        Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                     activityResultLanuncher.launch(intenttogallery)
 
 
@@ -135,10 +147,17 @@ class ProfileFragment : Fragment() {
 
             } else {
 
-                if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-                {
+                if (ContextCompat.checkSelfPermission(
+                        requireContext(),
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
 
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(
+                            requireActivity(),
+                            Manifest.permission.READ_EXTERNAL_STORAGE
+                        )
+                    ) {
                         Snackbar.make(
                             binding.root,
                             "Need Permission",
@@ -162,53 +181,85 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
-    }
 
+        val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            myCalendar.set(Calendar.YEAR, year)
+            myCalendar.set(Calendar.MONTH, month)
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            updatelabel(myCalendar)
+        }
+
+
+        binding.linearLayout7.setOnClickListener {
+
+            DatePickerDialog(
+                requireContext(),
+                datePicker,
+                myCalendar.get(Calendar.YEAR),
+                myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
+
+
+        }
+
+
+    }
+    private fun updatelabel(myCalendar: Calendar) {
+        val myFormat = "dd/MM/yyyy"
+        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        binding.enterDob.setText(sdf.format(myCalendar.time))
+    }
 
     private fun registerLauncher() {
-        activityResultLanuncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == AppCompatActivity.RESULT_OK) {
-                val intentFromResult = result.data
-                if (intentFromResult != null) {
-                    val imageData = intentFromResult.data
-                    imageData?.let {
-                        binding.userImage.setImageURI(it)
+        activityResultLanuncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == AppCompatActivity.RESULT_OK) {
+                    val intentFromResult = result.data
+                    if (intentFromResult != null) {
+                        val imageData = intentFromResult.data
+                        imageData?.let {
+                            binding.userImage.setImageURI(it)
 
-                        val inputStream: InputStream? = requireActivity().contentResolver.openInputStream(it)
-                        val bitmap = BitmapFactory.decodeStream(inputStream)
+                            val inputStream: InputStream? =
+                                requireActivity().contentResolver.openInputStream(it)
+                            val bitmap = BitmapFactory.decodeStream(inputStream)
 
-                        val byteArrayOutputStream = ByteArrayOutputStream()
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
-                        val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
-                        encodedImage = Base64.getEncoder().encodeToString(byteArray)
+                            val byteArrayOutputStream = ByteArrayOutputStream()
+                            bitmap.compress(
+                                Bitmap.CompressFormat.PNG,
+                                100,
+                                byteArrayOutputStream
+                            )
+                            val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
+                            encodedImage = Base64.getEncoder().encodeToString(byteArray)
 
 
-
+                        }
                     }
                 }
+
+
             }
+        permissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
+                if (result) {
+                    val intenttogallery =
+                        Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                    activityResultLanuncher.launch(intenttogallery)
 
 
-        }
-        permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){ result ->
-            if (result) {
-                val intenttogallery =
-                    Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                activityResultLanuncher.launch(intenttogallery)
+                } else {
+                    Toast.makeText(requireContext(), "Need Permission", Toast.LENGTH_LONG)
+                }
 
-
-            } else {
-                Toast.makeText(requireContext(), "Need Permission", Toast.LENGTH_LONG)
             }
-
-        }
-
-
-
     }
-
-
-
 }
+
+
+
+
+
 
 
