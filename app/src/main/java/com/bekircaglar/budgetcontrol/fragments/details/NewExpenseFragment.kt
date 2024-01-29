@@ -41,6 +41,7 @@ class NewExpenseFragment : Fragment() {
         binding.newExpenseFragment = this
         expenseListBank = ArrayList<BankModel>()
 
+
         viewModel.categoryNameM.observe(viewLifecycleOwner){
             categoryName = it
             getCatagoryImage()
@@ -64,7 +65,6 @@ class NewExpenseFragment : Fragment() {
 
 
     fun confirmButton(){
-
         val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy")
         val current = LocalDate.now().format(formatter)
 

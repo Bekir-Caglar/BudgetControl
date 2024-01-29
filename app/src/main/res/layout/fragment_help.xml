@@ -18,6 +18,7 @@
         android:background="@color/background_color"
         android:elevation="3dp"
         android:gravity="center"
+        android:padding="5dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +37,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-
             android:paddingHorizontal="8dp">
 
             <TextView
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:text="Getting Started"
                 android:textColor="@color/toolbar_title"
-                android:textSize="24dp" />
+                android:textSize="22dp" />
 
             <TextView
                 android:id="@+id/enterUsername"
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:text="Learn more about BudgetControl"
                 android:textColor="@color/info_text"
-                android:textSize="18dp"
+                android:textSize="16dp"
 
                 />
         </LinearLayout>
@@ -76,6 +76,7 @@
         android:layout_marginEnd="32dp"
         android:background="@color/background_color"
         android:elevation="3dp"
+        android:padding="5dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:text="FAQ"
                 android:textColor="@color/toolbar_title"
-                android:textSize="24dp" />
+                android:textSize="22dp" />
 
             <TextView
                 android:id="@+id/textView28"
@@ -113,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:text="find all major helps flows here"
                 android:textColor="@color/info_text"
-                android:textSize="18dp"
+                android:textSize="16dp"
 
                 />
         </LinearLayout>
@@ -135,6 +136,7 @@
         android:layout_marginEnd="32dp"
         android:background="@color/background_color"
         android:elevation="3dp"
+        android:padding="5dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -164,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:text="Support"
                 android:textColor="@color/toolbar_title"
-                android:textSize="24dp" />
+                android:textSize="22dp" />
 
             <TextView
                 android:id="@+id/textView2123"
@@ -172,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:text="Log your support tickets here"
                 android:textColor="@color/info_text"
-                android:textSize="18dp"
+                android:textSize="16dp"
 
                 />
         </LinearLayout>

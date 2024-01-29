@@ -261,15 +261,20 @@
                 android:textColor="@color/info_text" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <ImageView
+
+        <Button
             android:id="@+id/confrimButton"
             android:layout_width="320dp"
-            android:layout_height="60dp"
+            android:layout_height="56dp"
             android:layout_marginTop="32dp"
+            android:backgroundTint="@color/dark_text_color"
             android:onClick="@{() -> newExpenseFragment.confirmButton()}"
+            android:text="Confirm"
+            app:cornerRadius="10dp"
+            android:textSize="17dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-            app:srcCompat="@drawable/confirmbutton" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
