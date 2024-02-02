@@ -81,7 +81,6 @@ class BudgetFragment : Fragment() {
             bankList = it as ArrayList<BankModel>
             val adapter = BankAdapter(viewModel,requireContext(),bankList)
             binding.bankRectycle.adapter = adapter
-            println()
 
         }
         viewModel.expensesListCashM.observe(viewLifecycleOwner){

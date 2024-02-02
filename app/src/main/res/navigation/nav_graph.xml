@@ -62,6 +62,9 @@
         <action
             android:id="@+id/action_newExpenseFragment_to_budgetFragment"
             app:destination="@id/budgetFragment" />
+        <action
+            android:id="@+id/action_newExpenseFragment_to_dashboardFragment2"
+            app:destination="@id/dashboardFragment2" />
     </fragment>
     <fragment
         android:id="@+id/newIncomeFragment"
@@ -76,4 +79,9 @@
             android:id="@+id/action_newIncomeFragment_to_budgetFragment"
             app:destination="@id/budgetFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/dashboardFragment2"
+        android:name="com.bekircaglar.budgetcontrol.fragments.details.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
 </navigation>

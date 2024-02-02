@@ -40,9 +40,5 @@ class FragmentMorePageViewModel @Inject constructor(var repo: BudgetDaoRepo) :Vi
         repo.goAccountButton(view)
     }
 
-    fun goDash(view: View){
-        repo.goDashButton(view)
-
-    }
 
 }

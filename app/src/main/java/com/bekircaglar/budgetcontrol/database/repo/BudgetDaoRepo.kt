@@ -147,11 +147,6 @@ class BudgetDaoRepo(
         Navigation.findNavController(view).navigate(actacc)
 
     }
-    fun goDashButton(view: View){
-        val actdash = MorePageFragmentDirections.actionMorePageFragmentToDashboardFragment()
-        Navigation.findNavController(view).navigate(actdash)
-
-    }
     fun NullAllAccount(binding:FragmentNewExpenseBinding){
         binding.cashAccountButton.setBackgroundResource(R.drawable.cash_nav)
         binding.bankAccountButton.setBackgroundResource(R.drawable.button_navi)
@@ -331,7 +326,6 @@ class BudgetDaoRepo(
             val newbankexpense = BankModel(bankexpense_id,0,0,"","")
             bedao.deleteBankexpenselist(newbankexpense)
             getBankexpenseList()
-            println("as")
 
         }
     }
@@ -403,13 +397,13 @@ class BudgetDaoRepo(
     fun SelectIncomeBankAccountButton(binding: FragmentNewIncomeBinding) {
         nullaccountall(binding)
         binding.bankAccountButton.setBackgroundResource(R.drawable.button_navi_full)
-        println("çalışıyon mu 1")
+
 
     }
     fun SelectIncomeCashAccountButton(binding: FragmentNewIncomeBinding){
         nullaccountall(binding)
         binding.cashAccountButton.setBackgroundResource(R.drawable.cash_nav_full)
-        println("çalışıyon mu 2")
+
 
     }
 

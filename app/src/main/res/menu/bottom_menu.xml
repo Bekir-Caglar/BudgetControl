@@ -20,7 +20,7 @@
     <item
         android:title="Dashboard"
         android:icon="@drawable/outline_dashboard_24"
-        android:id="@+id/dashboardFragment"
+        android:id="@+id/dashboardFragment2"
         />
     <item
         android:title="More"

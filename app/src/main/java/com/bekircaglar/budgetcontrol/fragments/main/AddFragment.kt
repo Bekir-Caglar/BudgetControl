@@ -54,6 +54,7 @@ class AddFragment : Fragment() {
         tabLayout.addTab(tabLayout.newTab().setText("New expense"))
         tabLayout.addTab(tabLayout.newTab().setText("New income"))
 
+
         viewPager2.adapter = adapter
 
         tabLayout.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
@@ -76,6 +77,7 @@ class AddFragment : Fragment() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 tabLayout.selectTab(tabLayout.getTabAt(position))
+
             }
 
         })

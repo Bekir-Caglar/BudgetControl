@@ -47,7 +47,6 @@ class NewIncomeFragment : Fragment() {
 
         viewModel.categoryNameincomeM.observe(viewLifecycleOwner){
             categoryNameIncome = it as String
-            println(categoryNameIncome)
             getCatagoryIncomeImage()
         }
         viewModel.AccountsMoneyListM.observe(viewLifecycleOwner){
@@ -117,13 +116,11 @@ class NewIncomeFragment : Fragment() {
     fun selectBankAccountButton() {
         viewModel.SelectIncomeBankAccountButton(binding)
         bankAccountType = "Bank"
-        println(bankAccountType)
 
     }
     fun selectCashAccountButton(){
         viewModel.SelectIncomeCashAccountButton(binding)
         bankAccountType = "Cash"
-        println(bankAccountType)
 
     }
 

@@ -15,6 +15,20 @@
         tools:context=".fragments.details.NewIncomeFragment">
 
 
+        <Button
+            android:id="@+id/confrimButton"
+            android:layout_width="320dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="430dp"
+            android:backgroundTint="@color/dark_text_color"
+            android:onClick="@{() -> newIncomeFragment.confirmButton()}"
+            android:text="Confirm"
+            android:textSize="17dp"
+            app:cornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
         <TextView
             android:id="@+id/textView25"
             android:layout_width="wrap_content"
@@ -254,16 +268,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/imageView18"
-            android:layout_width="320dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="32dp"
-            android:onClick="@{() -> newIncomeFragment.confirmButton()}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-            app:srcCompat="@drawable/confirmbutton" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

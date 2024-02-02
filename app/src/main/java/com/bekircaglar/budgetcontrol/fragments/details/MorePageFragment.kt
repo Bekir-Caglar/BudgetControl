@@ -78,9 +78,5 @@ class MorePageFragment : Fragment() {
         viewModel.goAccount(binding.root)
 
     }
-    fun goDashButton(){
-      viewModel.goDash(binding.root)
-
-    }
 
 }
