@@ -17,7 +17,7 @@ import com.bekircaglar.budgetcontrol.model.AccountsMoney
 import com.bekircaglar.budgetcontrol.model.BankIncomeModel
 import com.bekircaglar.budgetcontrol.model.BankModel
 import com.bekircaglar.budgetcontrol.model.CashIncomeModel
-import com.bekircaglar.budgetcontrol.model.CashModel
+import com.bekircaglar.budgetcontrol.model.CashExpenseModel
 import com.bekircaglar.budgetcontrol.viewmodel.BudgetFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 class BudgetFragment : Fragment() {
  private lateinit var binding:FragmentBudgetBinding
-    private lateinit var cashList : ArrayList<CashModel>
+    private lateinit var cashList : ArrayList<CashExpenseModel>
     private lateinit var cashAdapter: CashAdapter
     private lateinit var bankList:ArrayList<BankModel>
     private lateinit var bankAdapter: BankAdapter
@@ -58,7 +58,7 @@ class BudgetFragment : Fragment() {
         var bankAccountMoney = "0"
         var cashAccountMoney = "0"
         var accountsMoneyList = ArrayList<AccountsMoney>()
-        cashList = ArrayList<CashModel>()
+        cashList = ArrayList<CashExpenseModel>()
         bankList = ArrayList<BankModel>()
         incomeBankList = ArrayList<BankIncomeModel>()
         incomeCashList = ArrayList<CashIncomeModel>()
@@ -84,7 +84,7 @@ class BudgetFragment : Fragment() {
 
         }
         viewModel.expensesListCashM.observe(viewLifecycleOwner){
-            cashList = it as ArrayList<CashModel>
+            cashList = it as ArrayList<CashExpenseModel>
             val adapter2 = CashAdapter(viewModel,requireContext(),cashList)
             binding.cashRecycle.adapter = adapter2
 

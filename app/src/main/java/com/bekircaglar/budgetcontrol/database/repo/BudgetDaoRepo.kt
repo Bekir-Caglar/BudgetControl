@@ -12,7 +12,7 @@ import com.bekircaglar.budgetcontrol.fragments.details.MorePageFragmentDirection
 import com.bekircaglar.budgetcontrol.model.BankIncomeModel
 import com.bekircaglar.budgetcontrol.model.BankModel
 import com.bekircaglar.budgetcontrol.model.CashIncomeModel
-import com.bekircaglar.budgetcontrol.model.CashModel
+import com.bekircaglar.budgetcontrol.model.CashExpenseModel
 import com.bekircaglar.budgetcontrol.adapter.BankAdapter
 import com.bekircaglar.budgetcontrol.adapter.BankIncomeAdapter
 import com.bekircaglar.budgetcontrol.adapter.CashAdapter
@@ -46,7 +46,7 @@ class BudgetDaoRepo(
 
     var userDataM:MutableLiveData<List<UserData>>
     var categoryNameM :MutableLiveData<String>
-    var expensesListCashM:MutableLiveData<List<CashModel>>
+    var expensesListCashM:MutableLiveData<List<CashExpenseModel>>
     var expenseListBankM:MutableLiveData<List<BankModel>>
     var AccountsMoneyListM:MutableLiveData<List<AccountsMoney>>
     var incomeListCashM:MutableLiveData<List<CashIncomeModel>>
@@ -80,7 +80,7 @@ class BudgetDaoRepo(
         return expenseListBankM
 
     }
-    fun bringExpenseCashList():MutableLiveData<List<CashModel>>{
+    fun bringExpenseCashList():MutableLiveData<List<CashExpenseModel>>{
         return expensesListCashM
 
     }
@@ -99,7 +99,7 @@ class BudgetDaoRepo(
 
 
 
-    fun expenseButton(viewModel: BudgetFragmentViewModel,binding:FragmentBudgetBinding,context: Context,cashList:ArrayList<CashModel>,bankList:ArrayList<BankModel>){
+    fun expenseButton(viewModel: BudgetFragmentViewModel, binding:FragmentBudgetBinding, context: Context, cashList:ArrayList<CashExpenseModel>, bankList:ArrayList<BankModel>){
         binding.incomeTransText.background = null
         binding.incomeTransText.setTextColor(Color.BLACK)
         binding.expenseTransText.setBackgroundResource(R.drawable.shape2)
@@ -301,7 +301,7 @@ class BudgetDaoRepo(
     }
     fun addCashexpenseList(exenseImg:Int,expenseDate:String,expensePrice:Int,expenseCategory:String){
         val job = CoroutineScope(Dispatchers.Main).launch {
-            val newcashexpense = CashModel(0,exenseImg,expensePrice,expenseCategory,expenseDate)
+            val newcashexpense = CashExpenseModel(0,exenseImg,expensePrice,expenseCategory,expenseDate)
             cedao.addCashexpenselist(newcashexpense)
 
         }
@@ -331,7 +331,7 @@ class BudgetDaoRepo(
     }
     fun deleteCashexpenseList(cashexpense_id:Int){
         val job = CoroutineScope(Dispatchers.Main).launch {
-            val newcashexpense = CashModel(cashexpense_id,0,0,"","")
+            val newcashexpense = CashExpenseModel(cashexpense_id,0,0,"","")
             cedao.deleteCashexpenselist(newcashexpense)
             getCashexpenseList()
 

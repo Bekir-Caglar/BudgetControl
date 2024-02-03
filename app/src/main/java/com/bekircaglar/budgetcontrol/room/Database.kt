@@ -6,10 +6,10 @@ import com.bekircaglar.budgetcontrol.model.AccountsMoney
 import com.bekircaglar.budgetcontrol.model.BankIncomeModel
 import com.bekircaglar.budgetcontrol.model.BankModel
 import com.bekircaglar.budgetcontrol.model.CashIncomeModel
-import com.bekircaglar.budgetcontrol.model.CashModel
+import com.bekircaglar.budgetcontrol.model.CashExpenseModel
 import com.bekircaglar.budgetcontrol.model.UserData
 
-@Database(entities = [CashModel::class, BankModel::class, CashIncomeModel::class, BankIncomeModel::class,AccountsMoney::class,UserData::class], version = 1)
+@Database(entities = [CashExpenseModel::class, BankModel::class, CashIncomeModel::class, BankIncomeModel::class,AccountsMoney::class,UserData::class], version = 1)
 abstract class Database:RoomDatabase() {
 
 

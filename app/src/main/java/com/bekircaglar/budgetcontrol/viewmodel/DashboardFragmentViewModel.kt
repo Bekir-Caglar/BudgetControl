@@ -7,7 +7,7 @@ import com.bekircaglar.budgetcontrol.model.AccountsMoney
 import com.bekircaglar.budgetcontrol.model.BankIncomeModel
 import com.bekircaglar.budgetcontrol.model.BankModel
 import com.bekircaglar.budgetcontrol.model.CashIncomeModel
-import com.bekircaglar.budgetcontrol.model.CashModel
+import com.bekircaglar.budgetcontrol.model.CashExpenseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class DashboardFragmentViewModel @Inject constructor(var repo: BudgetDaoRepo): ViewModel() {
 
     var AccountsMoneyListM = MutableLiveData<List<AccountsMoney>>()
-    var expensesListCashM = MutableLiveData<List<CashModel>>()
+    var expensesListCashM = MutableLiveData<List<CashExpenseModel>>()
     var expenseListBankM = MutableLiveData<List<BankModel>>()
     var incomeListCashM = MutableLiveData<List<CashIncomeModel>>()
     var incomeListBankM = MutableLiveData<List<BankIncomeModel>>()

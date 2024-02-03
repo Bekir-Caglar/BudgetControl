@@ -2,18 +2,10 @@ package com.bekircaglar.budgetcontrol.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.bekircaglar.budgetcontrol.R
 import com.bekircaglar.budgetcontrol.database.repo.BudgetDaoRepo
 import com.bekircaglar.budgetcontrol.databinding.FragmentNewExpenseBinding
 import com.bekircaglar.budgetcontrol.model.AccountsMoney
-import com.bekircaglar.budgetcontrol.model.BankIncomeModel
-import com.bekircaglar.budgetcontrol.model.BankModel
-import com.bekircaglar.budgetcontrol.model.CashIncomeModel
-import com.bekircaglar.budgetcontrol.model.CashModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

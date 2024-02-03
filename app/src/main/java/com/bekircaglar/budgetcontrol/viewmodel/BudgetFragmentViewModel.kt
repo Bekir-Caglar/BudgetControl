@@ -1,7 +1,6 @@
 package com.bekircaglar.budgetcontrol.viewmodel
 
 import android.content.Context
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bekircaglar.budgetcontrol.database.repo.BudgetDaoRepo
@@ -10,17 +9,14 @@ import com.bekircaglar.budgetcontrol.model.AccountsMoney
 import com.bekircaglar.budgetcontrol.model.BankIncomeModel
 import com.bekircaglar.budgetcontrol.model.BankModel
 import com.bekircaglar.budgetcontrol.model.CashIncomeModel
-import com.bekircaglar.budgetcontrol.model.CashModel
+import com.bekircaglar.budgetcontrol.model.CashExpenseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class BudgetFragmentViewModel @Inject constructor(var repo: BudgetDaoRepo): ViewModel() {
 
-    var expensesListCashM = MutableLiveData<List<CashModel>>()
+    var expensesListCashM = MutableLiveData<List<CashExpenseModel>>()
     var expenseListBankM = MutableLiveData<List<BankModel>>()
     var incomeListCashM = MutableLiveData<List<CashIncomeModel>>()
     var incomeListBankM = MutableLiveData<List<BankIncomeModel>>()
@@ -39,7 +35,7 @@ class BudgetFragmentViewModel @Inject constructor(var repo: BudgetDaoRepo): View
 
     }
 
-    fun goExpense(viewModel: BudgetFragmentViewModel,binding: FragmentBudgetBinding,context: Context,cashlist:ArrayList<CashModel>,bankList:ArrayList<BankModel>){
+    fun goExpense(viewModel: BudgetFragmentViewModel, binding: FragmentBudgetBinding, context: Context, cashlist:ArrayList<CashExpenseModel>, bankList:ArrayList<BankModel>){
         repo.expenseButton(viewModel,binding,context,cashlist,bankList)
 
     }

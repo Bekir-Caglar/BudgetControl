@@ -4,19 +4,17 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.bekircaglar.budgetcontrol.model.BankIncomeModel
-import com.bekircaglar.budgetcontrol.model.BankModel
-import com.bekircaglar.budgetcontrol.model.CashModel
+import com.bekircaglar.budgetcontrol.model.CashExpenseModel
 
 @Dao
 interface CashexpenseDao {
 
     @Query("SELECT * FROM Cashexpenselist")
-    suspend fun Cashexpenselistdao():List<CashModel>
+    suspend fun Cashexpenselistdao():List<CashExpenseModel>
 
     @Insert
-    suspend fun addCashexpenselist(cashexpenselist:CashModel)
+    suspend fun addCashexpenselist(cashexpenselist:CashExpenseModel)
 
     @Delete
-    suspend fun deleteCashexpenselist(cashexpenselist: CashModel)
+    suspend fun deleteCashexpenselist(cashexpenselist: CashExpenseModel)
 }

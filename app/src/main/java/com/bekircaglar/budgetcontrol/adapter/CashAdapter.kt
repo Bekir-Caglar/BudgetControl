@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bekircaglar.budgetcontrol.databinding.ExpenseRowBinding
-import com.bekircaglar.budgetcontrol.model.CashModel
+import com.bekircaglar.budgetcontrol.model.CashExpenseModel
 import com.bekircaglar.budgetcontrol.viewmodel.BudgetFragmentViewModel
 
-class CashAdapter(val viewModel: BudgetFragmentViewModel,val contex:Context, val cashlist: ArrayList<CashModel>):RecyclerView.Adapter<CashAdapter.CashHolder>() {
+class CashAdapter(val viewModel: BudgetFragmentViewModel,val contex:Context, val cashlist: ArrayList<CashExpenseModel>):RecyclerView.Adapter<CashAdapter.CashHolder>() {
     class CashHolder(val binding:ExpenseRowBinding):RecyclerView.ViewHolder(binding.root) {
 
     }
