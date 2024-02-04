@@ -4,6 +4,7 @@
 
     <!-- Customize your light theme here. -->
        <item name="colorPrimary">@color/my_light_primary</item>
+        <item name="colorSecondary">#27583B</item>
         <item name="android:itemBackground">@color/white</item>
         <item name="bottomNavigationStyle">@color/black</item>
 

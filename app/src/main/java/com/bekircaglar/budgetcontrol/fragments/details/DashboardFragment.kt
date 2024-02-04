@@ -75,6 +75,7 @@ class DashboardFragment : Fragment() {
             cashMoneyWrite = it[0].cashMoney
             updatePieChartMain()
             updateTotalMoney()
+            
         }
     }
 
