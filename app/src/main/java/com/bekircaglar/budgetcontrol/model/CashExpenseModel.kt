@@ -12,7 +12,7 @@ data class CashExpenseModel(@PrimaryKey(autoGenerate = true) @ColumnInfo("cashex
                             @ColumnInfo("cashexpense_img") @NotNull val expenseImg:Int,
                             @ColumnInfo("cashexpense_price") @NotNull override val expensePrice :Int,
                             @ColumnInfo("cashexpense_category") @NotNull override val expenseCatagory:String,
-                            @ColumnInfo("cashexpense_date") @NotNull val expenseDate:String) :Serializable,ExpenseModel{
+                            @ColumnInfo("cashexpense_date") @NotNull override val expenseDate:String) :Serializable,ExpenseModel{
 
 
 }

@@ -8,19 +8,29 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.ViewModel
 import com.bekircaglar.budgetcontrol.R
 import com.bekircaglar.budgetcontrol.databinding.FragmentDashboardBinding
 import com.bekircaglar.budgetcontrol.model.BankModel
 import com.bekircaglar.budgetcontrol.model.BankIncomeModel
 import com.bekircaglar.budgetcontrol.model.CashExpenseModel
 import com.bekircaglar.budgetcontrol.model.CashIncomeModel
+import com.bekircaglar.budgetcontrol.model.DashboardData
 import com.bekircaglar.budgetcontrol.model.ExpenseModel
 import com.bekircaglar.budgetcontrol.model.IncomeModel
+import com.bekircaglar.budgetcontrol.model.MonthAxisValueFormatter
 import com.bekircaglar.budgetcontrol.viewmodel.DashboardFragmentViewModel
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
@@ -31,7 +41,11 @@ class DashboardFragment : Fragment() {
     private var IncomeBudget: ArrayList<IncomeModel> = ArrayList()
     private var ExpenseBudget: ArrayList<ExpenseModel> = ArrayList()
 
-    val mediatorIncomeLiveData = MediatorLiveData<Pair<List<BankIncomeModel>, List<CashIncomeModel>>>()
+    private lateinit var lineChart: LineChart
+
+
+    val mediatorIncomeLiveData =
+        MediatorLiveData<Pair<List<BankIncomeModel>, List<CashIncomeModel>>>()
     var incomeListBankMData: List<BankIncomeModel>? = null
     var incomeListCashMData: List<CashIncomeModel>? = null
 
@@ -43,6 +57,11 @@ class DashboardFragment : Fragment() {
 
     val piechartExpenseList: ArrayList<PieEntry> = ArrayList()
     val piechartIncomeList: ArrayList<PieEntry> = ArrayList()
+
+    val formatter = DateTimeFormatter.ofPattern("MMMM")
+    val current = LocalDate.now().format(formatter)
+    val date = current.toString()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,17 +75,22 @@ class DashboardFragment : Fragment() {
         super.onCreate(savedInstanceState)
         val tempViewModel: DashboardFragmentViewModel by viewModels()
         viewModel = tempViewModel
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObservers()
+        viewModel.fetchCombinedData()
+
     }
 
     private fun setupObservers() {
         setupAccountMoneyObserver()
         setupExpenseObserver()
         setupIncomeObserver()
+        setupLineChart()
     }
 
     private fun setupAccountMoneyObserver() {
@@ -75,7 +99,7 @@ class DashboardFragment : Fragment() {
             cashMoneyWrite = it[0].cashMoney
             updatePieChartMain()
             updateTotalMoney()
-            
+
         }
     }
 
@@ -145,24 +169,38 @@ class DashboardFragment : Fragment() {
 
             for (bank in bankList) {
                 for (cash in cashList) {
-                    if (bank.expenseCatagory == cash.expenseCatagory) {
-                        val total = bank.expensePrice.toFloat() + cash.expensePrice.toFloat()
-                        categorySumMap[bank.expenseCatagory] = categorySumMap.getOrDefault(bank.expenseCatagory, 0f) + total
+
+                    var comingMonthCash = cash.expenseDate.split(" ")[1]
+                    var comingMonthBank = bank.expenseDate.split(" ")[1]
+                    if (date.equals(comingMonthCash) && date.equals(comingMonthBank)) {
+                        if (bank.expenseCatagory == cash.expenseCatagory) {
+                            val total = bank.expensePrice.toFloat() + cash.expensePrice.toFloat()
+                            categorySumMap[bank.expenseCatagory] =
+                                categorySumMap.getOrDefault(bank.expenseCatagory, 0f) + total
+                            ExpenseBudget.add(bank)
+                        }
+                    }
+                }
+
+            }
+
+            for (bank in bankList) {
+                var comingMonthBank = bank.expenseDate.split(" ")[1]
+                if (date == comingMonthBank) {
+                    if (bank.expenseCatagory !in categorySumMap.keys) {
+                        categorySumMap[bank.expenseCatagory] = bank.expensePrice.toFloat()
                         ExpenseBudget.add(bank)
                     }
                 }
             }
-
-            for (bank in bankList) {
-                if (bank.expenseCatagory !in categorySumMap.keys) {
-                    categorySumMap[bank.expenseCatagory] = bank.expensePrice.toFloat()
-                    ExpenseBudget.add(bank)
-                }
-            }
             for (cash in cashList) {
-                if (cash.expenseCatagory !in categorySumMap.keys) {
-                    categorySumMap[cash.expenseCatagory] = cash.expensePrice.toFloat()
-                    ExpenseBudget.add(cash)
+                var comingMonthCash = cash.expenseDate.split(" ")[1]
+
+                if (date == comingMonthCash) {
+                    if (cash.expenseCatagory !in categorySumMap.keys) {
+                        categorySumMap[cash.expenseCatagory] = cash.expensePrice.toFloat()
+                        ExpenseBudget.add(cash)
+                    }
                 }
             }
 
@@ -208,25 +246,36 @@ class DashboardFragment : Fragment() {
 
             for (bank in bankList) {
                 for (cash in cashList) {
-                    if (bank.incomeBy == cash.incomeBy) {
-                        val total = bank.incomePrice.toFloat() + cash.incomePrice.toFloat()
-                        categorySumMap[bank.incomeBy] = categorySumMap.getOrDefault(bank.incomeBy, 0f) + total
-                        IncomeBudget.add(bank)
+                    var comingMonthCash = cash.incomeDate.split(" ")[1]
+                    var comingMonthBank = bank.incomeDate.split(" ")[1]
+                    if (date.equals(comingMonthCash) && date.equals(comingMonthBank)) {
+                        if (bank.incomeBy == cash.incomeBy) {
+                            val total = bank.incomePrice.toFloat() + cash.incomePrice.toFloat()
+                            categorySumMap[bank.incomeBy] =
+                                categorySumMap.getOrDefault(bank.incomeBy, 0f) + total
+                            IncomeBudget.add(bank)
+                        }
                     }
                 }
             }
 
             for (bank in bankList) {
-                if (bank.incomeBy !in categorySumMap.keys) {
-                    categorySumMap[bank.incomeBy] = bank.incomePrice.toFloat()
-                    IncomeBudget.add(bank)
+                var comingMonthBank = bank.incomeDate.split(" ")[1]
+                if (date == comingMonthBank) {
+                    if (bank.incomeBy !in categorySumMap.keys) {
+                        categorySumMap[bank.incomeBy] = bank.incomePrice.toFloat()
+                        IncomeBudget.add(bank)
+                    }
                 }
             }
 
             for (cash in cashList) {
-                if (cash.incomeBy !in categorySumMap.keys) {
-                    categorySumMap[cash.incomeBy] = cash.incomePrice.toFloat()
-                    IncomeBudget.add(cash)
+                var comingMonthCash = cash.incomeDate.split(" ")[1]
+                if (date == comingMonthCash) {
+                    if (cash.incomeBy !in categorySumMap.keys) {
+                        categorySumMap[cash.incomeBy] = cash.incomePrice.toFloat()
+                        IncomeBudget.add(cash)
+                    }
                 }
             }
 
@@ -248,10 +297,97 @@ class DashboardFragment : Fragment() {
                 setEntryLabelTextSize(8f)
             }
         }
+
     }
+
+
+    fun setupLineChart() {
+        viewModel.combinedDataLiveData.observe(viewLifecycleOwner) { combinedData ->
+            val lineChart = binding.lineChart
+            val expenseEntry = mutableListOf<Entry>()
+            val incomeEntry = mutableListOf<Entry>()
+
+            val monthToFloatMap = mapOf(
+                "January" to 1f,
+                "February" to 2f,
+                "March" to 3f,
+                "April" to 4f,
+                "May" to 5f,
+                "June" to 6f,
+                "July" to 7f,
+                "August" to 8f,
+                "September" to 9f,
+                "October" to 10f,
+                "November" to 11f,
+                "December" to 12f
+            )
+
+            val monthlyExpenseMap = mutableMapOf<Float, Float>()
+            val monthlyIncomeMap = mutableMapOf<Float, Float>()
+
+            for (expense in combinedData.bankExpenseModels + combinedData.cashExpenseModels) {
+                val month = expense.expenseDate.split(" ")[1]
+                val monthFloat = monthToFloatMap[month] ?: continue
+                if (monthFloat != null) {
+                    val totalExpense = monthlyExpenseMap.getOrDefault(monthFloat, 0f) + expense.expensePrice.toFloat()
+                    monthlyExpenseMap[monthFloat] = totalExpense
+                }
+            }
+
+            for (income in combinedData.bankIncomeModels + combinedData.cashIncomeModels) {
+                val month = income.incomeDate.split(" ")[1]
+                val monthFloat = monthToFloatMap[month] ?: continue
+                if (monthFloat != null) {
+                    val totalIncome = monthlyIncomeMap.getOrDefault(monthFloat, 0f) + income.incomePrice.toFloat()
+                    monthlyIncomeMap[monthFloat] = totalIncome
+                }
+            }
+
+            for ((month, totalExpense) in monthlyExpenseMap) {
+                expenseEntry.add(Entry(month, totalExpense))
+            }
+
+            for ((month, totalIncome) in monthlyIncomeMap) {
+                incomeEntry.add(Entry(month, totalIncome))
+            }
+
+            val expenseDataSet = LineDataSet(expenseEntry,"Expensed money")
+            expenseDataSet.color = resources.getColor(R.color.expense_red)
+            expenseDataSet.lineWidth = 2f
+            expenseDataSet.circleColors = mutableListOf(resources.getColor(R.color.expense_red))
+
+            val incomeDataSet = LineDataSet(incomeEntry, "Incoming money")
+            incomeDataSet.color = resources.getColor(R.color.income_green)
+            incomeDataSet.lineWidth = 2f
+            incomeDataSet.circleColors = mutableListOf(resources.getColor(R.color.income_green))
+
+            val lineData = LineData(expenseDataSet, incomeDataSet)
+            lineChart.data = lineData
+
+            lineChart.description.isEnabled = false
+            lineChart.legend.isEnabled = true
+            lineChart.xAxis.valueFormatter = MonthAxisValueFormatter()
+            lineChart.axisLeft.isEnabled = true
+            lineChart.axisRight.isEnabled = false
+            lineChart.setTouchEnabled(true)
+
+            lineChart.invalidate()
+        }
+    }
+
+
+
+
+
+
+
+
+
 
     override fun onResume() {
         super.onResume()
+        viewModel.combinedDataLiveData
         viewModel.getAllLists()
     }
 }
+

@@ -1,5 +1,6 @@
 package com.bekircaglar.budgetcontrol.viewmodel
 
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bekircaglar.budgetcontrol.database.repo.BudgetDaoRepo
@@ -8,6 +9,7 @@ import com.bekircaglar.budgetcontrol.model.BankIncomeModel
 import com.bekircaglar.budgetcontrol.model.BankModel
 import com.bekircaglar.budgetcontrol.model.CashIncomeModel
 import com.bekircaglar.budgetcontrol.model.CashExpenseModel
+import com.bekircaglar.budgetcontrol.model.DashboardData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -20,6 +22,41 @@ class DashboardFragmentViewModel @Inject constructor(var repo: BudgetDaoRepo): V
     var incomeListCashM = MutableLiveData<List<CashIncomeModel>>()
     var incomeListBankM = MutableLiveData<List<BankIncomeModel>>()
 
+    val combinedDataLiveData = MediatorLiveData<DashboardData>().apply {
+        addSource(expenseListBankM) {
+            value = DashboardData(
+                it,
+                expensesListCashM.value ?: emptyList(),
+                incomeListBankM.value ?: emptyList(),
+                incomeListCashM.value ?: emptyList()
+            )
+        }
+        addSource(expensesListCashM) {
+            value = DashboardData(
+                expenseListBankM.value ?: emptyList(),
+                it,
+                incomeListBankM.value ?: emptyList(),
+                incomeListCashM.value ?: emptyList()
+            )
+        }
+        addSource(incomeListBankM) {
+            value = DashboardData(
+                expenseListBankM.value ?: emptyList(),
+                expensesListCashM.value ?: emptyList(),
+                it,
+                incomeListCashM.value ?: emptyList()
+            )
+        }
+        addSource(incomeListCashM) {
+            value = DashboardData(
+                expenseListBankM.value ?: emptyList(),
+                expensesListCashM.value ?: emptyList(),
+                incomeListBankM.value ?: emptyList(),
+                it
+            )
+        }
+    }
+
 
     init {
         getAllLists()
@@ -28,6 +65,17 @@ class DashboardFragmentViewModel @Inject constructor(var repo: BudgetDaoRepo): V
         incomeListBankM = repo.bringIncomeBankList()
         expenseListBankM = repo.bringExpenseBankList()
         expensesListCashM = repo.bringExpenseCashList()
+    }
+    fun fetchCombinedData(){
+        getAllLists()
+        combinedDataLiveData.value = DashboardData(
+            expenseListBankM.value ?: emptyList(),
+            expensesListCashM.value ?: emptyList(),
+            incomeListBankM.value ?: emptyList(),
+            incomeListCashM.value ?: emptyList()
+        )
+
+
     }
 
     fun getAllLists(){

@@ -3,6 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="my_light_primary">#D4F4E4</color>
+    <color name="baby_blue">#d5eaff</color>
+    <color name="expense_red">#FF0000</color>
+    <color name="income_green">#008000</color>
     <color name="my_light_secondary">#27583B</color>
     <color name="background_color">#f9fbf8</color>
     <color name="toolbar_title">#003829</color>
