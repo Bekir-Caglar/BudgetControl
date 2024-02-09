@@ -10,7 +10,7 @@
 
 ## Screenshots
 
-| ![Bütçe](https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/c98ce1f3-8641-46dd-abd9-25b3f2f56686) | ![Gider Ekle](https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/68b8d3e8-f27f-4614-97c2-ea710b89c05e){:height="300px"} | ![Gelir Ekle](https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/64bfa06b-a076-4d95-afbb-2beb4025afea){:height="300px"} |
+| ![Bütçe](https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/c98ce1f3-8641-46dd-abd9-25b3f2f56686){:height="300px"} | ![Gider Ekle](https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/68b8d3e8-f27f-4614-97c2-ea710b89c05e){:height="300px"} | ![Gelir Ekle](https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/64bfa06b-a076-4d95-afbb-2beb4025afea){:height="300px"} |
 |:---:|:---:|:---:|
 | *Budget Screen* | *Add expense Screen* | *Add income screen* |
 
