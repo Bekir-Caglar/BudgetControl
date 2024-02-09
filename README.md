@@ -2,14 +2,16 @@
 
 📸 Screenshots
 
-
+<table>
+  <td align="center">
 ![mainmockup](https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/1894d038-8394-4f13-bb6e-45496673983d)
+  </td>
 
-
+</table>
 <table>
   <tr>
     <td align="center">
-      <img src="https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/c98ce1f3-8641-46dd-abd9-25b3f2f56686" alt="Add Expense " width="300">
+      <img src="https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/c98ce1f3-8641-46dd-abd9-25b3f2f56686" alt="Add Expense " width="600">
     </td>
     <td align="center">
       <img src="https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/68b8d3e8-f27f-4614-97c2-ea710b89c05e" alt="Dashboard" width="300">
