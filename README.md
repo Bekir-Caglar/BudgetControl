@@ -10,7 +10,7 @@
 <table>
   <tr>
     <td align="center">
-      <img src="https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/c98ce1f3-8641-46dd-abd9-25b3f2f56686" alt="Budget" width="600">
+      <img src="https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/c98ce1f3-8641-46dd-abd9-25b3f2f56686" alt="Budget" width="600" height="auto">
     </td>
     <td align="center">
       <img src="https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/68b8d3e8-f27f-4614-97c2-ea710b89c05e" alt="Add expense" width="600">
