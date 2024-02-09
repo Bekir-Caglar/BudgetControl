@@ -2,8 +2,9 @@
 
 📸 Screenshots
 
-![mainmockup](https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/1894d038-8394-4f13-bb6e-45496673983d)
-
+<p align="center">
+  <img src="https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/1894d038-8394-4f13-bb6e-45496673983d" alt="Ana Resim">
+</p>
 
 
 <table>
@@ -23,7 +24,7 @@
     <td align="center">
      <img src="https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/f39edcaf-3b19-4809-aefe-ed43929a11230" alt="Profile" width="600">
     <td align="center">
-      <img src="https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/8a0e36ce-99b4-4e8c-9d4b706a21ab5f39" alt="More" width="600">
+      <img src="https://github.com/Bekir-Caglar/BudgetControl/assets/84410423/7b940285-718e-4d18-93f0-38d79977bb68" alt="More" width="600">
     </td>
   </tr>
 </table>
