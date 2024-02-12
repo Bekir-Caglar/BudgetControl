@@ -69,7 +69,7 @@ class NewExpenseFragment : Fragment() {
         val current = LocalDate.now().format(formatter)
 
         val date = current.toString()
-        val expensePrice = binding.editTextInput.text.toString()
+        val expensePrice = binding.expenseInput.text.toString()
 
         if (bankAccountType == null){
             bankAccountType = "Null"

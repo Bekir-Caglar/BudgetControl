@@ -51,6 +51,13 @@ class MorePageFragment : Fragment() {
             viewModel.getUserData()
         }
 
+        binding.creditCards.setOnClickListener {
+            creditCards()
+        }
+        binding.help.setOnClickListener {
+            goHelpPageButton()
+        }
+
 
 
 
@@ -74,7 +81,7 @@ class MorePageFragment : Fragment() {
         viewModel.goHelpPage(binding.root)
 
     }
-    fun goAccountButton(){
+    fun creditCards(){
         viewModel.goAccount(binding.root)
 
     }
