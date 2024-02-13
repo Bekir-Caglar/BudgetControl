@@ -10,6 +10,7 @@
     <color name="background_color">#f9fbf8</color>
     <color name="toolbar_title">#003829</color>
     <color name="light_text_color">#008768</color>
+    <color name="lite_button_color">#01a67f</color>
     <color name="dark_text_color">#006C52</color>
     <color name="number_color">#444745</color>
     <color name="info_text">#707974</color>
