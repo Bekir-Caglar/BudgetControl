@@ -12,6 +12,8 @@ interface CashexpenseDao {
     @Query("SELECT * FROM Cashexpenselist")
     suspend fun Cashexpenselistdao():List<CashExpenseModel>
 
+    @Query("SELECT * FROM Cashexpenselist WHERE cashexpense_user = :userMail")
+    suspend fun Cashexpenselistdaobyuser(userMail:String):List<CashExpenseModel>
     @Insert
     suspend fun addCashexpenselist(cashexpenselist:CashExpenseModel)
 

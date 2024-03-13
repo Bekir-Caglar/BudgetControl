@@ -18,11 +18,11 @@ class ProfileFragmentViewModel@Inject constructor(var repo: BudgetDaoRepo): View
 
     }
     fun getUserdata(){
-
         repo.getUserData()
     }
-    fun updateUser(newUsername:String,newUserEmail:String,newUserPhone:String,newUserImg:String,newUserDob:String){
-        repo.updateUserData(newUsername,newUserEmail,newUserPhone,newUserImg,newUserDob)
+
+    fun updateUser(newUsername:String,newUserPhone:String,newUserImg:String,newUserDob:String){
+        repo.updateUserData(newUserImg,newUsername,newUserPhone,newUserDob)
     }
 
 }

@@ -25,10 +25,7 @@ class BankAdapter(var viewmodel: BudgetFragmentViewModel,val context: Context, v
     override fun onBindViewHolder(holder: BankHolder, position: Int) {
         val revbanklist = bankList.reversed()
 
-        holder.binding.closebutton.setOnClickListener {
-            viewmodel.deleteBankexpenseList(revbanklist[position].expenseid)
 
-        }
         holder.binding.imageView7.setImageResource(revbanklist[position].expenseImg)
         holder.binding.catagoryText.text = revbanklist[position].expenseCatagory
         holder.binding.dateText.text = revbanklist[position].expenseDate

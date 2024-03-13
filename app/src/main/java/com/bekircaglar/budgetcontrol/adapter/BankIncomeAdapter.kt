@@ -27,10 +27,7 @@ class BankIncomeAdapter(var viewmodel:BudgetFragmentViewModel,val context: Conte
     override fun onBindViewHolder(holder: IncomeHolder, position: Int) {
         val revincomeBankList = incomeBankList.reversed()
 
-        holder.binding.closebutton.setOnClickListener {
-            viewmodel.deleteBankincomeList(revincomeBankList[position].income_id)
 
-        }
         holder.binding.priceTxt.setTextColor(Color.rgb(36,179,74))
 
         holder.binding.imageView7.setImageResource(revincomeBankList[position].incomeImg)

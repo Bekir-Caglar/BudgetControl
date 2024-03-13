@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.bekircaglar.budgetcontrol.database.repo.BudgetDaoRepo
 import com.bekircaglar.budgetcontrol.databinding.FragmentNewExpenseBinding
 import com.bekircaglar.budgetcontrol.model.AccountsMoney
+import com.bekircaglar.budgetcontrol.model.BankModel
+import com.bekircaglar.budgetcontrol.model.CashExpenseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -15,15 +17,15 @@ class NewExpenseFragmentViewModel @Inject constructor(var repo: BudgetDaoRepo):V
 
 
     init {
-        repo.getAccountsMoney()
+
         AccountsMoneyListM = repo.bringAccountsMoneyList()
         categoryNameM = repo.bringCagegoryNameM()
 
 
     }
 
-    fun UpdateMoney(newBankMoney:String,newCashMoney:String){
-        repo.updateAccountsMoney(newBankMoney,newCashMoney)
+    fun UpdateMoney(updatedCashMoney:String,updatedBankMoney:String){
+        repo.updateAccountsMoneyByUser(updatedCashMoney, updatedBankMoney)
 
     }
 
@@ -45,12 +47,12 @@ class NewExpenseFragmentViewModel @Inject constructor(var repo: BudgetDaoRepo):V
         repo.selectCatagory(binding)
     }
 
-    fun addBankexpenseList(exenseImg:Int,expenseDate:String,expensePrice:Int,expenseCategory:String){
-        repo.addBankexpenseList(exenseImg,expenseDate,expensePrice,expenseCategory)
+    fun addBankexpenseList(bankExpense :BankModel){
+        repo.addBankexpenseList(bankExpense)
 
     }
-    fun addCashexpenseList(exenseImg:Int,expenseDate:String,expensePrice:Int,expenseCategory:String){
-       repo.addCashexpenseList(exenseImg,expenseDate,expensePrice,expenseCategory)
+    fun addCashexpenseList(cashExpense:CashExpenseModel){
+       repo.addCashexpenseList(cashExpense)
 
     }
 

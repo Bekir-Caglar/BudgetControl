@@ -13,6 +13,9 @@ interface CashincomeDao {
     @Query("SELECT * FROM Cashincomelist")
     suspend fun Cashincomelistdao():List<CashIncomeModel>
 
+    @Query("SELECT * FROM Cashincomelist WHERE cashincome_user = :userMail")
+    suspend fun Cashincomelistdaobyuser(userMail:String):List<CashIncomeModel>
+
     @Insert
     suspend fun addCashincomelist(cashincomelist: CashIncomeModel)
 

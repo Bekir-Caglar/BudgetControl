@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull
 data class AccountsMoney(
     @PrimaryKey(autoGenerate = true) @ColumnInfo("Accounts_id") @NotNull val accountsId: Int,
     @ColumnInfo("BankAccountMoney") @NotNull val bankMoney: String,
-    @ColumnInfo("CashAccountMoney") @NotNull val cashMoney: String
+    @ColumnInfo("CashAccountMoney") @NotNull val cashMoney: String,
+    @ColumnInfo("UserAccount") @NotNull val userAccount: String
 ) {
 }

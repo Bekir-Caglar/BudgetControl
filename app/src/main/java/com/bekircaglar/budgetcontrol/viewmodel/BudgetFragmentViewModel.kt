@@ -10,29 +10,26 @@ import com.bekircaglar.budgetcontrol.model.BankIncomeModel
 import com.bekircaglar.budgetcontrol.model.BankModel
 import com.bekircaglar.budgetcontrol.model.CashIncomeModel
 import com.bekircaglar.budgetcontrol.model.CashExpenseModel
+import com.bekircaglar.budgetcontrol.model.UserData
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class BudgetFragmentViewModel @Inject constructor(var repo: BudgetDaoRepo): ViewModel() {
 
+
     var expensesListCashM = MutableLiveData<List<CashExpenseModel>>()
     var expenseListBankM = MutableLiveData<List<BankModel>>()
     var incomeListCashM = MutableLiveData<List<CashIncomeModel>>()
     var incomeListBankM = MutableLiveData<List<BankIncomeModel>>()
     var AccountsMoneyListM = MutableLiveData<List<AccountsMoney>>()
+    var userDataList = MutableLiveData<List<UserData>>()
 
     init {
-
-
-        getAllLists()
-        AccountsMoneyListM = repo.bringAccountsMoneyList()
-        incomeListCashM = repo.bringIncomeCashList()
-        incomeListBankM = repo.bringIncomeBankList()
-        expenseListBankM = repo.bringExpenseBankList()
-        expensesListCashM = repo.bringExpenseCashList()
-
-
+        userDataList = repo.bringUserDataList()
+        getAllListByUser()
+        updateData()
     }
 
     fun goExpense(viewModel: BudgetFragmentViewModel, binding: FragmentBudgetBinding, context: Context, cashlist:ArrayList<CashExpenseModel>, bankList:ArrayList<BankModel>){
@@ -44,29 +41,26 @@ class BudgetFragmentViewModel @Inject constructor(var repo: BudgetDaoRepo): View
 
     }
 
-    fun getAllLists(){
-        repo.getAccountsMoney()
-        repo.getBankexpenseList()
-        repo.getCashexpenseList()
-        repo.getBankincomeList()
-        repo.getCashincomeList()
+    fun updateData(){
+        AccountsMoneyListM = repo.bringAccountsMoneyList()
+        incomeListCashM = repo.bringIncomeCashList()
+        incomeListBankM = repo.bringIncomeBankList()
+        expenseListBankM = repo.bringExpenseBankList()
+        expensesListCashM = repo.bringExpenseCashList()
     }
 
-    fun deleteBankexpenseList(bankexpense_id:Int){
-        repo.deleteBankexpenseList(bankexpense_id)
+    fun getUserData(){
+        repo.getUserData()
     }
-    fun deleteCashexpenseList(cashexpense_id:Int){
-        repo.deleteCashexpenseList(cashexpense_id)
+    fun getAllListByUser(){
+            repo.getAccountsMoneyByUser()
+            repo.getBankexpenseListByUser()
+            repo.getCashexpenseListByUser()
+            repo.getBankincomeListByUser()
+            repo.getCashincomeListByUser()
 
     }
-    fun deleteBankincomeList(bankincome_id:Int){
-        repo.deleteBankincomeList(bankincome_id)
 
-    }
-    fun deleteCashincomeList(cashincome_id:Int){
-        repo.deleteCashincomeList(cashincome_id)
-
-    }
 
 
 

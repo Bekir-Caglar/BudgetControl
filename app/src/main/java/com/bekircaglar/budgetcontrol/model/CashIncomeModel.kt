@@ -11,7 +11,10 @@ data class CashIncomeModel(@PrimaryKey(autoGenerate = true) @ColumnInfo("cashinc
                            @ColumnInfo("cashincome_img") @NotNull val incomeImg:Int,
                            @ColumnInfo("cashincome_by") @NotNull override val incomeBy:String,
                            @ColumnInfo("cashincome_date") @NotNull override val incomeDate:String,
-                           @ColumnInfo("cashincome_price") @NotNull override val incomePrice:Int):Serializable,IncomeModel
+                           @ColumnInfo("cashincome_price") @NotNull override val incomePrice:Int,
+                           @ColumnInfo("cashincome_user") @NotNull override val incomeUser:String,
+
+):Serializable,IncomeModel
 {
 
 }

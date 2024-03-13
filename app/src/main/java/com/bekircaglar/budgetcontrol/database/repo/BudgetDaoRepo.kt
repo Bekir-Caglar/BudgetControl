@@ -27,20 +27,23 @@ import com.bekircaglar.budgetcontrol.room.CashexpenseDao
 import com.bekircaglar.budgetcontrol.room.CashincomeDao
 import com.bekircaglar.budgetcontrol.room.UserDataDao
 import com.bekircaglar.budgetcontrol.viewmodel.BudgetFragmentViewModel
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
 
+
+private lateinit var auth : FirebaseAuth
+var mail = FirebaseAuth.getInstance().currentUser?.email
 class BudgetDaoRepo(
     var amdao: AccountsMoneyDao,
     var bedao:BankexpenseDao,
     var bidao:BankincomeDao,
     var cedao:CashexpenseDao,
     var cidao:CashincomeDao,
-    var uddao: UserDataDao
-){
+    var uddao: UserDataDao) {
 
     var categoryNameIncome =""
 
@@ -53,7 +56,9 @@ class BudgetDaoRepo(
     var incomeListBankM:MutableLiveData<List<BankIncomeModel>>
     var categoryNameIncomeM:MutableLiveData<String>
 
+
     init {
+        auth = FirebaseAuth.getInstance()
         userDataM = MutableLiveData()
         AccountsMoneyListM = MutableLiveData()
         categoryNameIncomeM = MutableLiveData()
@@ -77,22 +82,27 @@ class BudgetDaoRepo(
 
     }
     fun bringExpenseBankList():MutableLiveData<List<BankModel>>{
+        auth = FirebaseAuth.getInstance()
         return expenseListBankM
 
     }
     fun bringExpenseCashList():MutableLiveData<List<CashExpenseModel>>{
+        auth = FirebaseAuth.getInstance()
         return expensesListCashM
 
     }
     fun bringIncomeBankList():MutableLiveData<List<BankIncomeModel>>{
+        auth = FirebaseAuth.getInstance()
         return incomeListBankM
 
     }
     fun bringIncomeCashList():MutableLiveData<List<CashIncomeModel>>{
+        auth = FirebaseAuth.getInstance()
         return incomeListCashM
 
     }
     fun bringCategoryIncomeNameM():MutableLiveData<String>{
+        auth = FirebaseAuth.getInstance()
         return categoryNameIncomeM
     }
 
@@ -244,114 +254,104 @@ class BudgetDaoRepo(
         }
     }
 
-    fun getAccountsMoney(){
+
+    fun insertAccountsMoney(newAccountsMoney:AccountsMoney){
         val job = CoroutineScope(Dispatchers.Main).launch {
-            AccountsMoneyListM.value = amdao.getAccountsMoney()
+            auth = FirebaseAuth.getInstance()
+            amdao.insertAccountMoney(newAccountsMoney)
         }
     }
-    fun updateAccountsMoney(newBankMoney:String,newCashMoney:String){
+    fun getAccountsMoneyByUser(){
         val job = CoroutineScope(Dispatchers.Main).launch {
-            val updatedMoney = AccountsMoney(1,newBankMoney,newCashMoney)
-            amdao.updateAccountsMoney(updatedMoney)
+            auth = FirebaseAuth.getInstance()
+            AccountsMoneyListM.value = amdao.getAccountsMoneyByUser(auth.currentUser?.email.toString())
+        }
+    }
+    fun updateAccountsMoneyByUser(updatedCashMoney:String,updatedBankMoney:String){
+        val job = CoroutineScope(Dispatchers.Main).launch {
+            auth = FirebaseAuth.getInstance()
+            amdao.updateAccountMoneyByUser(auth.currentUser?.email.toString(),updatedBankMoney,updatedCashMoney)
+
         }
     }
     fun getUserData(){
+        auth = FirebaseAuth.getInstance()
         val job = CoroutineScope(Dispatchers.Main).launch {
-            userDataM.value = uddao.getUser()
+            auth = FirebaseAuth.getInstance()
+            userDataM.value = uddao.getUserByMail(auth.currentUser?.email.toString())
 
         }
     }
-    fun updateUserData(newUsername:String,newUserEmail:String,newUserPhone:String,newUserImg:String,newUserDob:String) {
+    fun updateUserData(userImage:String,userName:String,userPhone:String,userDob:String) {
         val job = CoroutineScope(Dispatchers.Main).launch {
-            val updatedUserData =
-                UserData(1, newUsername, newUserEmail, newUserPhone, newUserImg, newUserDob)
-            uddao.updateUser(updatedUserData)
+            auth = FirebaseAuth.getInstance()
+            uddao.updateUserByMail(userImage,userName,userPhone, auth.currentUser?.email.toString(),userDob)
         }
     }
-    fun getBankexpenseList(){
+    fun insertUserData(newUserData:UserData){
         val job = CoroutineScope(Dispatchers.Main).launch {
-            expenseListBankM.value = bedao.Bankexpenselistdao()
+            uddao.insertUser(newUserData)
         }
     }
-    fun getCashexpenseList(){
-        val job = CoroutineScope(Dispatchers.Main).launch {
-            expensesListCashM.value = cedao.Cashexpenselistdao()
 
-
-        }
-    }
-    fun getBankincomeList(){
+    fun getBankexpenseListByUser(){
+        auth = FirebaseAuth.getInstance()
+        mail = FirebaseAuth.getInstance().currentUser?.email
         val job = CoroutineScope(Dispatchers.Main).launch {
-            incomeListBankM.value = bidao.Bankincomelistdao()
-        }
-    }
-    fun getCashincomeList(){
-        val job = CoroutineScope(Dispatchers.Main).launch {
-            incomeListCashM.value = cidao.Cashincomelistdao()
+           expenseListBankM.value = (mail?.let { bedao.getBankexpenseListByUser(it) })
+            println("burası çalıştı banka expense list db ${expenseListBankM.value}")
 
         }
     }
 
-    fun addBankexpenseList(exenseImg:Int,expenseDate:String,expensePrice:Int,expenseCategory:String){
+    fun getCashexpenseListByUser(){
+        auth = FirebaseAuth.getInstance()
+        mail = FirebaseAuth.getInstance().currentUser?.email
         val job = CoroutineScope(Dispatchers.Main).launch {
-            val newbankexpense = BankModel(0,exenseImg,expensePrice,expenseCategory,expenseDate)
-            bedao.addBankexpenselist(newbankexpense)
-
-        }
-    }
-    fun addCashexpenseList(exenseImg:Int,expenseDate:String,expensePrice:Int,expenseCategory:String){
-        val job = CoroutineScope(Dispatchers.Main).launch {
-            val newcashexpense = CashExpenseModel(0,exenseImg,expensePrice,expenseCategory,expenseDate)
-            cedao.addCashexpenselist(newcashexpense)
-
-        }
-    }
-    fun addBankincomeList(incomeImg:Int,incomeDate:String,incomeBy:String,incomePrice:Int){
-        val job = CoroutineScope(Dispatchers.Main).launch {
-            val newbankincome = BankIncomeModel(0,incomeImg,incomeBy,incomeDate,incomePrice)
-            bidao.addBankincomelist(newbankincome)
-
-        }
-    }
-    fun addCasgincomeList(incomeImg:Int,incomeDate:String,incomeBy:String,incomePrice:Int){
-        val job = CoroutineScope(Dispatchers.Main).launch {
-            val newcashincome = CashIncomeModel(0,incomeImg,incomeBy,incomeDate,incomePrice)
-            cidao.addCashincomelist(newcashincome)
-
+           expensesListCashM.value = mail?.let { cedao.Cashexpenselistdaobyuser(it) }
         }
     }
 
-    fun deleteBankexpenseList(bankexpense_id:Int){
+    fun getBankincomeListByUser(){
+        auth = FirebaseAuth.getInstance()
+        mail = FirebaseAuth.getInstance().currentUser?.email
         val job = CoroutineScope(Dispatchers.Main).launch {
-            val newbankexpense = BankModel(bankexpense_id,0,0,"","")
-            bedao.deleteBankexpenselist(newbankexpense)
-            getBankexpenseList()
+            incomeListBankM.value = mail?.let { bidao.getBankincomelistbyuser(it) }
+        }
+    }
+    fun getCashincomeListByUser(){
+        auth = FirebaseAuth.getInstance()
+        mail = FirebaseAuth.getInstance().currentUser?.email
+        val job = CoroutineScope(Dispatchers.Main).launch {
+            incomeListCashM.value = mail?.let { cidao.Cashincomelistdaobyuser(it) }
+        }
+    }
+
+    fun addBankexpenseList(bankexpense :BankModel){
+        val job = CoroutineScope(Dispatchers.Main).launch {
+            bedao.addBankexpenselist(bankexpense)
 
         }
     }
-    fun deleteCashexpenseList(cashexpense_id:Int){
+    fun addCashexpenseList(cashExpense :CashExpenseModel){
         val job = CoroutineScope(Dispatchers.Main).launch {
-            val newcashexpense = CashExpenseModel(cashexpense_id,0,0,"","")
-            cedao.deleteCashexpenselist(newcashexpense)
-            getCashexpenseList()
+            cedao.addCashexpenselist(cashExpense)
 
         }
     }
-    fun deleteBankincomeList(bankincome_id:Int){
+    fun addBankincomeList(bankincome:BankIncomeModel){
         val job = CoroutineScope(Dispatchers.Main).launch {
-            val newbankincome = BankIncomeModel(bankincome_id,0,"","",0)
-            bidao.deleteBankincomelist(newbankincome)
-            getBankincomeList()
-        }
-    }
-    fun deleteCashincomeList(cashincome_id:Int){
-        val job = CoroutineScope(Dispatchers.Main).launch {
-            val newcashincome = CashIncomeModel(cashincome_id,0,"","",0)
-            cidao.deleteCashincomelist(newcashincome)
-            getCashincomeList()
+            bidao.addBankincomelist(bankincome)
 
         }
     }
+    fun addCasgincomeList(cashincome :CashIncomeModel){
+        val job = CoroutineScope(Dispatchers.Main).launch {
+            cidao.addCashincomelist(cashincome)
+
+        }
+    }
+
 
     fun nullallcategoryincome(binding: FragmentNewIncomeBinding){
         binding.imageView.background = null

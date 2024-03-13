@@ -12,7 +12,8 @@ data class BankIncomeModel(
     @ColumnInfo("bankincome_img") @NotNull  val incomeImg: Int,
     @ColumnInfo("bankincome_by") @NotNull override val incomeBy: String,
     @ColumnInfo("bankincome_date") @NotNull  override val incomeDate: String,
-    @ColumnInfo("bankincome_price") @NotNull override val incomePrice: Int
+    @ColumnInfo("bankincome_price") @NotNull override val incomePrice: Int,
+    @ColumnInfo("bankincome_user") @NotNull override val incomeUser: String
 ) : Serializable,IncomeModel
 {
 

@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_budgetFragment_to_addFragment"
             app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_budgetFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/moreFragment"
@@ -104,6 +107,9 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment2"
+            app:destination="@id/signUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -124,5 +130,25 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:destination="@id/budgetFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_newUserProfile"
+            app:destination="@id/newUserProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/newUserProfile"
+        android:name="com.bekircaglar.budgetcontrol.fragments.details.NewUserProfile"
+        android:label="NewUserProfile"
+        tools:layout="@layout/fragment_new_user_profile"
+        >
+        <action
+            android:id="@+id/action_newUserProfile_to_budgetFragment"
+            app:destination="@id/budgetFragment" />
+        <argument
+            android:name="userName"
+            app:argType="string" />
+        <argument android:name="userMail" />
     </fragment>
 </navigation>

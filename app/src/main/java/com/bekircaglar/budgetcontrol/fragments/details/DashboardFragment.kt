@@ -28,6 +28,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -40,7 +41,7 @@ class DashboardFragment : Fragment() {
     private var cashMoneyWrite: String = "0"
     private var IncomeBudget: ArrayList<IncomeModel> = ArrayList()
     private var ExpenseBudget: ArrayList<ExpenseModel> = ArrayList()
-
+    private lateinit var auth : FirebaseAuth
     private lateinit var lineChart: LineChart
 
 
@@ -67,7 +68,11 @@ class DashboardFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentDashboardBinding.inflate(layoutInflater, container, false)
+        auth = FirebaseAuth.getInstance()
+
+
         return binding.root
     }
 
@@ -82,7 +87,7 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObservers()
-        viewModel.fetchCombinedData()
+        viewModel.fetchCombinedData(auth.currentUser?.email.toString())
 
     }
 
@@ -95,8 +100,10 @@ class DashboardFragment : Fragment() {
 
     private fun setupAccountMoneyObserver() {
         viewModel.AccountsMoneyListM.observe(viewLifecycleOwner) {
-            bankMoneyWrite = it[0].bankMoney
-            cashMoneyWrite = it[0].cashMoney
+            if (it.isEmpty().not()) {
+                bankMoneyWrite = it[0].bankMoney
+                cashMoneyWrite = it[0].cashMoney
+            }
             updatePieChartMain()
             updateTotalMoney()
 

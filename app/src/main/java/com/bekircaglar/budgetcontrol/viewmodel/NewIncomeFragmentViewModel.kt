@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.bekircaglar.budgetcontrol.database.repo.BudgetDaoRepo
 import com.bekircaglar.budgetcontrol.databinding.FragmentNewIncomeBinding
 import com.bekircaglar.budgetcontrol.model.AccountsMoney
+import com.bekircaglar.budgetcontrol.model.BankIncomeModel
+import com.bekircaglar.budgetcontrol.model.CashIncomeModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -17,15 +19,11 @@ class NewIncomeFragmentViewModel @Inject constructor(var repo: BudgetDaoRepo): V
 
 
     init {
-        repo.getAccountsMoney()
         AccountsMoneyListM = repo.bringAccountsMoneyList()
         categoryNameincomeM = repo.bringCategoryIncomeNameM()
-
-
     }
-    fun UpdateMoney(newBankMoney:String,newCashMoney:String){
-        repo.updateAccountsMoney(newBankMoney,newCashMoney)
-
+    fun updateAccountMoney(updatedCashMoney:String,updatedBankMoney:String){
+        repo.updateAccountsMoneyByUser(updatedCashMoney,updatedBankMoney)
     }
     fun nullallcategoryincome(binding: FragmentNewIncomeBinding){
         repo.nullallcategoryincome(binding)
@@ -39,12 +37,12 @@ class NewIncomeFragmentViewModel @Inject constructor(var repo: BudgetDaoRepo): V
         repo.selectcategoryincome(binding)
     }
 
-    fun addBankincomeList(incomeImg:Int,incomeDate:String,incomeBy:String,incomePrice:Int){
-        repo.addBankincomeList(incomeImg,incomeDate, incomeBy, incomePrice)
+    fun addBankincomeList(bankincome:BankIncomeModel){
+        repo.addBankincomeList(bankincome)
 
     }
-    fun addCashincomeList(incomeImg:Int,incomeDate:String,incomeBy:String,incomePrice:Int){
-        repo.addCasgincomeList(incomeImg, incomeDate, incomeBy, incomePrice)
+    fun addCashincomeList(cashincome:CashIncomeModel){
+        repo.addCasgincomeList(cashincome)
 
     }
     fun SelectIncomeBankAccountButton(binding: FragmentNewIncomeBinding) {

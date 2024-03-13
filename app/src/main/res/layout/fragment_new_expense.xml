@@ -58,9 +58,9 @@
                 android:text="Euro"
                 android:textColor="#2196F3"
                 android:textSize="26dp"
-                app:layout_constraintBottom_toBottomOf="@+id/editTextInput"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editTextInput" />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView

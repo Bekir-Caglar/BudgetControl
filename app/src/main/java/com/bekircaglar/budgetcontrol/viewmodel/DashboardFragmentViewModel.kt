@@ -59,14 +59,13 @@ class DashboardFragmentViewModel @Inject constructor(var repo: BudgetDaoRepo): V
 
 
     init {
-        getAllLists()
         AccountsMoneyListM = repo.bringAccountsMoneyList()
         incomeListCashM = repo.bringIncomeCashList()
         incomeListBankM = repo.bringIncomeBankList()
         expenseListBankM = repo.bringExpenseBankList()
         expensesListCashM = repo.bringExpenseCashList()
     }
-    fun fetchCombinedData(){
+    fun fetchCombinedData(userMail: String){
         getAllLists()
         combinedDataLiveData.value = DashboardData(
             expenseListBankM.value ?: emptyList(),
@@ -79,11 +78,11 @@ class DashboardFragmentViewModel @Inject constructor(var repo: BudgetDaoRepo): V
     }
 
     fun getAllLists(){
-        repo.getAccountsMoney()
-        repo.getBankexpenseList()
-        repo.getCashexpenseList()
-        repo.getBankincomeList()
-        repo.getCashincomeList()
+        repo.getAccountsMoneyByUser()
+        repo.getBankexpenseListByUser()
+        repo.getCashexpenseListByUser()
+        repo.getBankincomeListByUser()
+        repo.getCashincomeListByUser()
     }
 
 }

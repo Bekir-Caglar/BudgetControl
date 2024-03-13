@@ -11,11 +11,11 @@
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_profileFragment_to_morePageFragment"
-            app:destination="@id/morePageFragment" />
-        <action
             android:id="@+id/action_profileFragment_to_helpFragment"
             app:destination="@id/helpFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_morePageFragment"
+            app:destination="@id/morePageFragment" />
     </fragment>
     <fragment
         android:id="@+id/helpFragment"

@@ -26,10 +26,7 @@ class CashIncomeAdapter(val viewModel: BudgetFragmentViewModel,val context: Cont
     override fun onBindViewHolder(holder: IncomeCashHolder, position: Int) {
         val revincomeCashList = incomeCashList.reversed()
 
-        holder.binding.closebutton.setOnClickListener {
-            viewModel.deleteCashincomeList(revincomeCashList[position].income_id)
 
-        }
         holder.binding.priceTxt.setTextColor(Color.rgb(36,179,74))
 
         holder.binding.imageView7.setImageResource(revincomeCashList[position].incomeImg)

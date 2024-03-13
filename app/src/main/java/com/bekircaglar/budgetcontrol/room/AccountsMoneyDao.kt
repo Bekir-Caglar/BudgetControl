@@ -12,10 +12,14 @@ import com.bekircaglar.budgetcontrol.model.BankModel
 
 interface AccountsMoneyDao {
 
-    @Query("SELECT * FROM Accounts")
-    suspend fun  getAccountsMoney():List<AccountsMoney>
 
-    @Update
-    suspend fun updateAccountsMoney(updatedMoney:AccountsMoney)
+    @Insert
+    suspend fun insertAccountMoney(accountsMoney: AccountsMoney)
+
+    @Query("SELECT * FROM Accounts WHERE UserAccount = :userMail")
+    suspend fun getAccountsMoneyByUser(userMail:String):List<AccountsMoney>
+
+    @Query("UPDATE Accounts SET CashAccountMoney = :updatedCashMoney  , BankAccountMoney = :updatedBankMoney WHERE UserAccount = :userMail")
+    suspend fun updateAccountMoneyByUser(userMail:String,updatedBankMoney:String,updatedCashMoney:String)
 
 }

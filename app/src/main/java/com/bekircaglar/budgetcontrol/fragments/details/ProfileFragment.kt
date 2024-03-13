@@ -19,15 +19,19 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.drawToBitmap
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import com.bekircaglar.budgetcontrol.R
 import com.bekircaglar.budgetcontrol.databinding.FragmentProfileBinding
 import com.bekircaglar.budgetcontrol.model.UserData
 import com.bekircaglar.budgetcontrol.viewmodel.ProfileFragmentViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.Base64
 import java.util.Calendar
@@ -42,12 +46,13 @@ class ProfileFragment : Fragment() {
     private lateinit var viewModel: ProfileFragmentViewModel
     private var userDataList = ArrayList<UserData>()
     private lateinit var encodedImage: String
+    private lateinit var auth : FirebaseAuth
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
-
+        auth = FirebaseAuth.getInstance()
 
         return binding.root
 
@@ -65,28 +70,32 @@ class ProfileFragment : Fragment() {
 
         val myCalendar = Calendar.getInstance()
 
+        //get arguments from signup fragment
+        val username = arguments?.getString("username")
+        val usermail = arguments?.getString("userEmail")
 
         viewModel.userDataList.observe(viewLifecycleOwner) {
 
             userDataList = it as ArrayList<UserData>
 
-            if (userDataList[0].user_name == "null") {
-                binding.enterUsername.setHint("Enter Username")
-                binding.enterEmail.setHint("Enter Email")
+            if (userDataList.isEmpty()) {
+                binding.enterUsername.setText(username)
+                binding.enterEmail.setText(usermail)
                 binding.enterPhone.setHint("Enter Phone")
                 binding.enterDob.setHint("Enter Date of Birth")
+                binding.userMail.text = usermail
+                binding.userName.text = username
                 binding.userImage.setImageResource(R.drawable.user)
-            } else {
+            }
+            else {
                 binding.userName.text = userDataList[0].user_name
                 binding.userMail.text = userDataList[0].user_email
                 encodedImage = userDataList[0].user_image
 
                 val decodedString: ByteArray = Base64.getDecoder().decode(encodedImage)
-                    val decodedByte: Bitmap =
-                        BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-                    binding.userImage.setImageBitmap(decodedByte)
+                val decodedByte: Bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
 
-
+                binding.userImage.setImageBitmap(decodedByte)
                 binding.enterUsername.setText(userDataList[0].user_name)
                 binding.enterPhone.setText(userDataList[0].user_phone)
                 binding.enterEmail.setText(userDataList[0].user_email)
@@ -101,8 +110,38 @@ class ProfileFragment : Fragment() {
             val newUserPhone = binding.enterPhone.text.toString()
             val newUserDob = binding.enterDob.text.toString()
 
-            viewModel.updateUser(newUsername, newUserEmail, newUserPhone, encodedImage, newUserDob)
-            Toast.makeText(requireContext(), "Updated", Toast.LENGTH_LONG).show()
+
+            try {
+                val bitmap: Bitmap = binding.userImage.drawToBitmap() // Var olan resmi al
+                val byteArrayOutputStream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+                val byteArray = byteArrayOutputStream.toByteArray()
+                encodedImage = Base64.getEncoder().encodeToString(byteArray) // Resmi encode et
+
+            }
+            catch (e:Exception){
+                e.printStackTrace()
+                binding.userImage.setImageResource(R.drawable.user)
+            }
+            val bitmap: Bitmap = binding.userImage.drawToBitmap() // Var olan resmi al
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+            val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
+            val encodedImage: String = Base64.getEncoder().encodeToString(byteArray) // Resmi encode et
+
+
+            if (newUsername.isEmpty() || newUserEmail.isEmpty() || newUserPhone.isEmpty() || newUserDob.isEmpty()) {
+                Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_LONG).show()
+            }
+            else{
+                viewModel.updateUser(newUsername,newUserPhone,encodedImage,newUserDob)
+                Toast.makeText(requireContext(), "User Data Updated", Toast.LENGTH_LONG).show()
+                val action = ProfileFragmentDirections.actionProfileFragmentToMorePageFragment()
+                Navigation.findNavController(view).navigate(action)
+
+            }
+
+
         }
 
         registerLauncher()

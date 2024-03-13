@@ -14,6 +14,9 @@ interface BankincomeDao {
     @Query("SELECT * FROM Bankincomelist")
     suspend fun Bankincomelistdao():List<BankIncomeModel>
 
+    @Query("SELECT * FROM Bankincomelist WHERE bankincome_user = :userMail")
+    suspend fun getBankincomelistbyuser(userMail:String):List<BankIncomeModel>
+
     @Insert
     suspend fun addBankincomelist(bankincomelist:BankIncomeModel)
 

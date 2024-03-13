@@ -12,8 +12,10 @@ import com.bekircaglar.budgetcontrol.databinding.FragmentNewExpenseBinding
 import com.bekircaglar.budgetcontrol.fragments.main.AddFragmentDirections
 import com.bekircaglar.budgetcontrol.model.AccountsMoney
 import com.bekircaglar.budgetcontrol.model.BankModel
+import com.bekircaglar.budgetcontrol.model.CashExpenseModel
 import com.bekircaglar.budgetcontrol.util.switch
 import com.bekircaglar.budgetcontrol.viewmodel.NewExpenseFragmentViewModel
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -31,6 +33,7 @@ class NewExpenseFragment : Fragment() {
     private lateinit var viewModel:NewExpenseFragmentViewModel
     private var bankAccountMoney :String = "0"
     private var cashAccountMoney :String = "0"
+    private lateinit var auth: FirebaseAuth
 
 
     override fun onCreateView(
@@ -41,6 +44,7 @@ class NewExpenseFragment : Fragment() {
         binding.newExpenseFragment = this
         expenseListBank = ArrayList<BankModel>()
 
+        auth = FirebaseAuth.getInstance()
 
         viewModel.categoryNameM.observe(viewLifecycleOwner){
             categoryName = it
@@ -49,8 +53,10 @@ class NewExpenseFragment : Fragment() {
         }
         viewModel.AccountsMoneyListM.observe(viewLifecycleOwner){
             var accountsMoneyList = it as ArrayList<AccountsMoney>
-            bankAccountMoney = accountsMoneyList[0].bankMoney
-            cashAccountMoney = accountsMoneyList[0].cashMoney
+            if (accountsMoneyList.isEmpty().not()) {
+                bankAccountMoney = accountsMoneyList[0].bankMoney
+                cashAccountMoney = accountsMoneyList[0].cashMoney
+            }
         }
         selectCatagory()
         return binding.root
@@ -71,27 +77,27 @@ class NewExpenseFragment : Fragment() {
         val date = current.toString()
         val expensePrice = binding.expenseInput.text.toString()
 
-        if (bankAccountType == null){
-            bankAccountType = "Null"
-        }
         if (bankAccountType == "Bank" && categoryName != "Null"){
-            viewModel.addBankexpenseList(categoryImg,date,expensePrice.toInt(),categoryName)
+
+            val bankexpense = BankModel(0,categoryImg,expensePrice.toInt(),categoryName,date,auth.currentUser?.email.toString())
+
+            viewModel.addBankexpenseList(bankexpense)
+            val lastBankmoney = bankAccountMoney.toInt() - expensePrice.toInt()
+
+            viewModel.UpdateMoney(cashAccountMoney,lastBankmoney.toString())
+
             val actiongobudget = AddFragmentDirections.actionAddFragmentToBudgetFragment()
             Navigation.findNavController(binding.root).navigate(actiongobudget)
-
-            var lastBankmoney = bankAccountMoney.toInt() - expensePrice.toInt()
-            viewModel.UpdateMoney(lastBankmoney.toString(),cashAccountMoney)
-
-
         }
         if (bankAccountType == "Cash" && categoryName != "Null"){
-            viewModel.addCashexpenseList(categoryImg,date,expensePrice.toInt(),categoryName)
+            val cashexpense = CashExpenseModel(0,categoryImg,expensePrice.toInt(),categoryName,date,auth.currentUser?.email.toString())
+            viewModel.addCashexpenseList(cashexpense)
+
+            val lastCashMoney = cashAccountMoney.toInt() - expensePrice.toInt()
+            viewModel.UpdateMoney(lastCashMoney.toString(),bankAccountMoney)
+
             val actiongobudget = AddFragmentDirections.actionAddFragmentToBudgetFragment()
             Navigation.findNavController(binding.root).navigate(actiongobudget)
-
-            var lastCashMoney = cashAccountMoney.toInt() - expensePrice.toInt()
-            viewModel.UpdateMoney(bankAccountMoney,lastCashMoney.toString())
-
         }
 
 

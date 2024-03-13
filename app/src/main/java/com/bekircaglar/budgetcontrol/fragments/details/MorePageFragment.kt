@@ -37,7 +37,7 @@ class MorePageFragment : Fragment() {
 
         viewModel.userDataList.observe(viewLifecycleOwner){
 
-            if (it[0].user_name =="null"){
+            if (it.isEmpty()){
                 binding.imageViewpp.setImageResource(R.drawable.user)
                 binding.yourEmailText.text = "Your Email"
                 binding.yourNameText.text = "Your Name"
@@ -46,13 +46,12 @@ class MorePageFragment : Fragment() {
                 encodedImage = it[0].user_image
                 binding.yourEmailText.text = it[0].user_email
                 binding.yourNameText.text = it[0].user_name
-                val decodedString: ByteArray = Base64.getDecoder().decode(encodedImage)
-                if (decodedString != null) {
+                try {
+                    val decodedString: ByteArray = Base64.getDecoder().decode(encodedImage)
                     val decodedByte: Bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
                     binding.imageViewpp.setImageBitmap(decodedByte)
-                }
-                else{
-                    binding.imageViewpp.setImageResource(R.drawable.user)
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
 
             }

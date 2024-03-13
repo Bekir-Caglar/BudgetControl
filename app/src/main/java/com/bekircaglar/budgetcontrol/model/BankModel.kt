@@ -12,7 +12,11 @@ data class BankModel(@PrimaryKey(autoGenerate = true) @ColumnInfo("bankexpense_i
                      @ColumnInfo("bankexpense_img") @NotNull val expenseImg:Int,
                      @ColumnInfo("bankexpense_price") @NotNull override val expensePrice :Int,
                      @ColumnInfo("bankexpense_category") @NotNull override val expenseCatagory:String,
-                     @ColumnInfo("bankexpense_date") @NotNull override val expenseDate:String) :Serializable,ExpenseModel{
+                     @ColumnInfo("bankexpense_date") @NotNull override val expenseDate:String,
+                     @ColumnInfo("bankexpense_user") @NotNull  override val expenseUser:String,
+    )
+
+    :Serializable,ExpenseModel{
 
 
 }
