@@ -17,6 +17,7 @@
         android:gravity="top"
         android:lineSpacingExtra="-2sp"
         android:text="Sign in"
+        android:textStyle="bold"
         android:textAppearance="@style/sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -40,7 +41,7 @@
         android:id="@+id/label2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="32dp"
         android:gravity="top"
         android:lineSpacingExtra="8sp"
         android:text="Password"
@@ -57,7 +58,9 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="48dp"
         android:background="@drawable/myrect"
+        android:textSize="16dp"
         android:elevation="2dp"
+        android:padding="10dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,14 +78,15 @@
         android:background="@drawable/myrect"
         android:elevation="2dp"
         android:ems="10"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/label2" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonSignin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
@@ -104,14 +108,14 @@
         android:layout_marginEnd="72dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2">
+        app:layout_constraintTop_toBottomOf="@+id/buttonSignin">
 
         <TextView
             android:id="@+id/textView27"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Or sign up using"
+            android:text="Or sign in using"
             android:textColor="@color/info_text"
             android:textSize="17dp"
             app:layout_constraintEnd_toEndOf="parent"

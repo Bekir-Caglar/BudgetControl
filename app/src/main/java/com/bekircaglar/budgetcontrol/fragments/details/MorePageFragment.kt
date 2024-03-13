@@ -36,18 +36,35 @@ class MorePageFragment : Fragment() {
         binding.morePageFragment = this
 
         viewModel.userDataList.observe(viewLifecycleOwner){
-            encodedImage = it[0].user_image
 
-            val decodedString: ByteArray = Base64.getDecoder().decode(encodedImage)
-            if (decodedString != null) {
-                val decodedByte: Bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-                binding.imageViewpp.setImageBitmap(decodedByte)
+            if (it[0].user_name =="null"){
+                binding.imageViewpp.setImageResource(R.drawable.user)
+                binding.yourEmailText.text = "Your Email"
+                binding.yourNameText.text = "Your Name"
             }
             else{
-                binding.imageViewpp.setImageResource(R.drawable.user)
+                encodedImage = it[0].user_image
+                binding.yourEmailText.text = it[0].user_email
+                binding.yourNameText.text = it[0].user_name
+                val decodedString: ByteArray = Base64.getDecoder().decode(encodedImage)
+                if (decodedString != null) {
+                    val decodedByte: Bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                    binding.imageViewpp.setImageBitmap(decodedByte)
+                }
+                else{
+                    binding.imageViewpp.setImageResource(R.drawable.user)
+                }
+
             }
-            binding.yourEmailText.text = it[0].user_email
-            binding.yourNameText.text = it[0].user_name
+
+
+
+
+
+
+
+
+
             viewModel.getUserData()
         }
 

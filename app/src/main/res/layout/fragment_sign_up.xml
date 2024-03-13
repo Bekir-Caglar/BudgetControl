@@ -8,12 +8,29 @@
     tools:context=".fragments.details.SignUpFragment">
 
 
+    <EditText
+        android:id="@+id/eMailEditText"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/myrect"
+        android:elevation="2dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:padding="10dp"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label3" />
+
     <TextView
         android:id="@+id/label3"
         android:layout_width="0dp"
         android:layout_height="24dp"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
         android:gravity="top"
         android:lineSpacingExtra="8sp"
@@ -21,11 +38,12 @@
         android:textAppearance="@style/label"
         android:translationY="-3.8sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/firstnameEditText" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress2"
+        android:id="@+id/passwordEditText"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="48dp"
@@ -34,22 +52,8 @@
         android:background="@drawable/myrect"
         android:elevation="2dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label3" />
-
-    <EditText
-        android:id="@+id/editTextNumberPassword2"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="48dp"
-        android:background="@drawable/myrect"
-        android:elevation="2dp"
-        android:ems="10"
-        android:inputType="numberPassword"
+        android:padding="10dp"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/label4" />
@@ -58,62 +62,53 @@
         android:id="@+id/label4"
         android:layout_width="0dp"
         android:layout_height="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:gravity="top"
         android:lineSpacingExtra="8sp"
         android:text="Password"
         android:textAppearance="@style/label"
         android:translationY="-3.8sp"
-        app:layout_constraintStart_toStartOf="@+id/editTextNumberPassword2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
-        android:src="@drawable/singup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/passwordEditText"
+        app:layout_constraintTop_toBottomOf="@+id/eMailEditText" />
 
     <TextView
         android:id="@+id/label5"
         android:layout_width="155dp"
         android:layout_height="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="120dp"
         android:gravity="top"
         android:lineSpacingExtra="8sp"
         android:text="First Name"
         android:textAppearance="@style/label"
         android:translationY="-3.8sp"
-        app:layout_constraintStart_toStartOf="@+id/editTextText"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress2" />
+        app:layout_constraintStart_toStartOf="@+id/firstnameEditText"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/lastNameEditText"
         android:layout_width="155dp"
         android:layout_height="40dp"
-        android:layout_marginTop="2dp"
         android:layout_marginEnd="48dp"
         android:background="@drawable/myrect"
         android:elevation="2dp"
         android:ems="10"
         android:inputType="text"
+        android:padding="10dp"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/label6" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/firstnameEditText"
         android:layout_width="155dp"
         android:layout_height="40dp"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="2dp"
         android:background="@drawable/myrect"
         android:elevation="2dp"
         android:ems="10"
         android:inputType="text"
+        android:padding="10dp"
+        android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/label5" />
 
@@ -126,11 +121,21 @@
         android:text="Last Name"
         android:textAppearance="@style/label"
         android:translationY="-3.8sp"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText2"
+        app:layout_constraintEnd_toEndOf="@+id/lastNameEditText"
         app:layout_constraintTop_toTopOf="@+id/label5" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/singup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/createAccountButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
@@ -141,7 +146,7 @@
         app:cornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberPassword2" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 
     <TextView
         android:id="@+id/textView10"
@@ -149,12 +154,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:text="Already a member?"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toStartOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintEnd_toEndOf="@+id/createAccountButton"
+        app:layout_constraintStart_toStartOf="@+id/createAccountButton"
+        app:layout_constraintTop_toBottomOf="@+id/createAccountButton" />
 
     <TextView
-        android:id="@+id/textView42"
+        android:id="@+id/signinTextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

@@ -220,6 +220,8 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        app:navigationIcon="@drawable/chevron_left"
+        app:navigationIconTint="@color/toolbar_title"
         app:title="Accounts"
         app:titleTextColor="@color/toolbar_title"
         app:layout_constraintEnd_toEndOf="parent"

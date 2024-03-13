@@ -6,10 +6,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,26 +19,18 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
-import androidx.core.view.drawToBitmap
 import androidx.fragment.app.viewModels
 import com.bekircaglar.budgetcontrol.R
 import com.bekircaglar.budgetcontrol.databinding.FragmentProfileBinding
-import com.bekircaglar.budgetcontrol.model.AccountsMoney
 import com.bekircaglar.budgetcontrol.model.UserData
-import com.bekircaglar.budgetcontrol.viewmodel.BudgetFragmentViewModel
 import com.bekircaglar.budgetcontrol.viewmodel.ProfileFragmentViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileOutputStream
 import java.io.InputStream
-import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Base64
 import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 
 @AndroidEntryPoint
@@ -55,7 +45,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
 
 
@@ -77,34 +67,40 @@ class ProfileFragment : Fragment() {
 
 
         viewModel.userDataList.observe(viewLifecycleOwner) {
+
             userDataList = it as ArrayList<UserData>
-            binding.userName.text = userDataList[0].user_name
-            binding.userMail.text = userDataList[0].user_email
-            encodedImage = userDataList[0].user_image
 
-            val decodedString: ByteArray = Base64.getDecoder().decode(encodedImage)
-            if (decodedString != null) {
-                val decodedByte: Bitmap =
-                    BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-                binding.userImage.setImageBitmap(decodedByte)
-            } else {
+            if (userDataList[0].user_name == "null") {
+                binding.enterUsername.setHint("Enter Username")
+                binding.enterEmail.setHint("Enter Email")
+                binding.enterPhone.setHint("Enter Phone")
+                binding.enterDob.setHint("Enter Date of Birth")
                 binding.userImage.setImageResource(R.drawable.user)
-            }
+            } else {
+                binding.userName.text = userDataList[0].user_name
+                binding.userMail.text = userDataList[0].user_email
+                encodedImage = userDataList[0].user_image
 
-            binding.enterUsername.setText(userDataList[0].user_name)
-            binding.enterPhone.setText(userDataList[0].user_phone)
-            binding.enterEmail.setText(userDataList[0].user_email)
-            binding.enterDob.setText(userDataList[0].user_dob)
+                val decodedString: ByteArray = Base64.getDecoder().decode(encodedImage)
+                    val decodedByte: Bitmap =
+                        BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                    binding.userImage.setImageBitmap(decodedByte)
+
+
+                binding.enterUsername.setText(userDataList[0].user_name)
+                binding.enterPhone.setText(userDataList[0].user_phone)
+                binding.enterEmail.setText(userDataList[0].user_email)
+                binding.enterDob.setText(userDataList[0].user_dob)
+            }
         }
 
+
         binding.applyChange.setOnClickListener {
-            // Yeni kullanıcı bilgilerini al
             val newUsername = binding.enterUsername.text.toString()
             val newUserEmail = binding.enterEmail.text.toString()
             val newUserPhone = binding.enterPhone.text.toString()
             val newUserDob = binding.enterDob.text.toString()
 
-            // Kullanıcı bilgilerini güncelle
             viewModel.updateUser(newUsername, newUserEmail, newUserPhone, encodedImage, newUserDob)
             Toast.makeText(requireContext(), "Updated", Toast.LENGTH_LONG).show()
         }
@@ -115,7 +111,7 @@ class ProfileFragment : Fragment() {
             if (Build.VERSION.SDK_INT >= 33) {
                 if (ContextCompat.checkSelfPermission(
                         requireContext(),
-                        android.Manifest.permission.READ_MEDIA_IMAGES
+                        Manifest.permission.READ_MEDIA_IMAGES
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
 
@@ -126,10 +122,10 @@ class ProfileFragment : Fragment() {
                     ) {
                         Snackbar.make(
                             binding.root, "Need Permission", Snackbar.LENGTH_INDEFINITE
-                        ).setAction("Give Permission", View.OnClickListener {
+                        ).setAction("Give Permission") {
                             permissionLauncher.launch(Manifest.permission.READ_MEDIA_IMAGES)
 
-                        }).show()
+                        }.show()
 
 
                     } else {
@@ -149,7 +145,7 @@ class ProfileFragment : Fragment() {
 
                 if (ContextCompat.checkSelfPermission(
                         requireContext(),
-                        android.Manifest.permission.READ_EXTERNAL_STORAGE
+                        Manifest.permission.READ_EXTERNAL_STORAGE
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
 
@@ -162,7 +158,7 @@ class ProfileFragment : Fragment() {
                             binding.root,
                             "Need Permission",
                             Snackbar.LENGTH_INDEFINITE
-                        ).setAction("Give Permission", View.OnClickListener {
+                        ).setAction("Give Permission", {
                             permissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
 
                         }).show()
@@ -182,7 +178,7 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+        val datePicker = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, month)
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -250,7 +246,7 @@ class ProfileFragment : Fragment() {
 
 
                 } else {
-                    Toast.makeText(requireContext(), "Need Permission", Toast.LENGTH_LONG)
+                    Toast.makeText(requireContext(), "Need Permission", Toast.LENGTH_LONG).show()
                 }
 
             }
