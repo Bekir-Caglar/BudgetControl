@@ -21,20 +21,18 @@
         tools:context=".fragments.main.BudgetFragment">
 
 
-
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="0dp"
             android:layout_height="60dp"
-            app:title="@string/app_name"
-            app:titleTextColor="@color/toolbar_title"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/app_name"
+            app:titleTextColor="@color/toolbar_title" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linear"

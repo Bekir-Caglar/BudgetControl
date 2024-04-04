@@ -3,10 +3,14 @@ package com.bekircaglar.budgetcontrol.fragments.main
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -56,7 +60,6 @@ class BudgetFragment : Fragment() {
         binding.budgetFragment = this
         requireActivity() as AppCompatActivity
         requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.VISIBLE
-
         auth = FirebaseAuth.getInstance()
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.clientId))
@@ -66,6 +69,10 @@ class BudgetFragment : Fragment() {
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
 
+        binding.toolbar.inflateMenu(R.menu.logout_menu)
+        binding.toolbar.setOnMenuItemClickListener {
+            onOptionsItemSelected(it)
+        }
 
         return binding.root
 
@@ -73,6 +80,7 @@ class BudgetFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         val tempViewModel : BudgetFragmentViewModel by viewModels()
         viewModel = tempViewModel
         viewModel.getAllListByUser()
@@ -133,15 +141,6 @@ class BudgetFragment : Fragment() {
 
         }
 
-        binding.toolbar.setOnClickListener {
-            auth.signOut()
-            googleSignInClient.signOut()
-            Toast.makeText(requireContext(),"Logged out",Toast.LENGTH_SHORT).show()
-            val actionlogout = BudgetFragmentDirections.actionBudgetFragmentToLoginFragment()
-            Navigation.findNavController(view).navigate(actionlogout)
-
-
-        }
 
 
 
@@ -168,9 +167,24 @@ class BudgetFragment : Fragment() {
         }
     }
 
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.logoutButton-> {
+                auth.signOut()
+                googleSignInClient.signOut()
+                Toast.makeText(requireContext(),"Logged out", Toast.LENGTH_SHORT).show()
+                val actionlogout = BudgetFragmentDirections.actionBudgetFragmentToLoginFragment()
+                Navigation.findNavController(requireView()).navigate(actionlogout)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onResume() {
         super.onResume()
-        println("onResume() called from BudgetFragment.kt")
         viewModel.getAllListByUser()
         viewModel.updateData()
     }

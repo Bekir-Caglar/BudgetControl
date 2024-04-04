@@ -19,6 +19,7 @@ import com.bekircaglar.budgetcontrol.adapter.CashAdapter
 import com.bekircaglar.budgetcontrol.adapter.CashIncomeAdapter
 import com.bekircaglar.budgetcontrol.databinding.FragmentNewIncomeBinding
 import com.bekircaglar.budgetcontrol.model.AccountsMoney
+import com.bekircaglar.budgetcontrol.model.Category
 import com.bekircaglar.budgetcontrol.model.UserData
 import com.bekircaglar.budgetcontrol.room.AccountsMoneyDao
 import com.bekircaglar.budgetcontrol.room.BankexpenseDao
@@ -186,73 +187,34 @@ class BudgetDaoRepo(
         binding.cashAccountButton.setBackgroundResource(R.drawable.cash_nav_full)
 
     }
-    fun selectCatagory(binding:FragmentNewExpenseBinding){
+    fun selectCategory(binding: FragmentNewExpenseBinding) {
+        val categories = listOf(
+            Category("Apart", binding.imageViewApart),
+            Category("Beauty", binding.imageViewBeauty),
+            Category("Car", binding.imageViewCar),
+            Category("Clothes", binding.imageViewClothes),
+            Category("Donate", binding.imageViewDonate),
+            Category("Food", binding.imageViewFood),
+            Category("Gift", binding.imageViewGift),
+            Category("Health", binding.imageViewHealth),
+            Category("Pet", binding.imageViewPet),
+            Category("Other", binding.imageViewOther)
+        )
 
-        var categoryName:String = "Other"
-
-        binding.imageViewApart.setOnClickListener {
-            NullAllImg(binding)
-            binding.imageViewApart.setBackgroundResource(R.drawable.shape0)
-            categoryName = "Apart"
-            categoryNameM.value = categoryName
-        }
-        binding.imageViewBeauty.setOnClickListener {
-            NullAllImg(binding)
-            binding.imageViewBeauty.setBackgroundResource(R.drawable.shape0)
-            categoryName = "Beauty"
-            categoryNameM.value = categoryName
-        }
-        binding.imageViewCar.setOnClickListener {
-            NullAllImg(binding)
-            binding.imageViewCar.setBackgroundResource(R.drawable.shape0)
-            categoryName = "Car"
-            categoryNameM.value = categoryName
-        }
-        binding.imageViewClothes.setOnClickListener {
-            NullAllImg(binding)
-            binding.imageViewClothes.setBackgroundResource(R.drawable.shape0)
-            categoryName = "Clothes"
-            categoryNameM.value = categoryName
-        }
-        binding.imageViewPet.setOnClickListener {
-            NullAllImg(binding)
-            binding.imageViewPet.setBackgroundResource(R.drawable.shape0)
-            categoryName = "Pet"
-            categoryNameM.value = categoryName
-        }
-        binding.imageViewDonate.setOnClickListener {
-            NullAllImg(binding)
-            binding.imageViewDonate.setBackgroundResource(R.drawable.shape0)
-            categoryName = "Donate"
-            categoryNameM.value = categoryName
-        }
-        binding.imageViewHealth.setOnClickListener {
-            NullAllImg(binding)
-            binding.imageViewHealth.setBackgroundResource(R.drawable.shape0)
-            categoryName = "Health"
-            categoryNameM.value = categoryName
-        }
-        binding.imageViewFood.setOnClickListener {
-            NullAllImg(binding)
-            binding.imageViewFood.setBackgroundResource(R.drawable.shape0)
-            categoryName = "Food"
-            categoryNameM.value = categoryName
-        }
-        binding.imageViewGift.setOnClickListener {
-            NullAllImg(binding)
-            binding.imageViewGift.setBackgroundResource(R.drawable.shape0)
-            categoryName = "Gift"
-            categoryNameM.value = categoryName
-
-        }
-        binding.imageViewOther.setOnClickListener {
-            NullAllImg(binding)
-            binding.imageViewOther.setBackgroundResource(R.drawable.shape0)
-            categoryName = "Other"
-            categoryNameM.value = categoryName
-
+        for (category in categories) {
+            category.imageView.setOnClickListener {
+                selectCategory(binding,category)
+            }
         }
     }
+
+    private fun selectCategory(binding:FragmentNewExpenseBinding,category: Category) {
+        NullAllImg(binding)
+        category.imageView.setBackgroundResource(R.drawable.shape0)
+        val categoryName = category.name
+        categoryNameM.value = categoryName
+    }
+
 
 
     fun insertAccountsMoney(newAccountsMoney:AccountsMoney){
@@ -364,35 +326,26 @@ class BudgetDaoRepo(
         binding.cashAccountButton.setBackgroundResource(R.drawable.cash_nav)
         binding.bankAccountButton.setBackgroundResource(R.drawable.button_navi)
     }
-    fun selectcategoryincome(binding: FragmentNewIncomeBinding){
-        binding.imageView.setOnClickListener {
-            nullallcategoryincome(binding)
-            binding.imageView.setBackgroundResource(R.drawable.shape0)
-            categoryNameIncome = "Salary"
-            categoryNameIncomeM.value = categoryNameIncome
+    fun selectCategoryIncome(binding: FragmentNewIncomeBinding) {
+        val incomeCategories = listOf(
+            Category("Salary", binding.imageView),
+            Category("Income", binding.imageView4),
+            Category("Savings", binding.imageView5),
+            Category("Other", binding.imageView6),
+        )
 
+        for (category in incomeCategories) {
+            category.imageView.setOnClickListener {
+                selectCategoryIncome(binding,category)
+            }
         }
-        binding.imageView4.setOnClickListener {
-            nullallcategoryincome(binding)
-            binding.imageView4.setBackgroundResource(R.drawable.shape0)
-            categoryNameIncome = "Income"
-            categoryNameIncomeM.value = categoryNameIncome
+    }
 
-        }
-        binding.imageView5.setOnClickListener {
-            nullallcategoryincome(binding)
-            binding.imageView5.setBackgroundResource(R.drawable.shape0)
-            categoryNameIncome = "Savings"
-            categoryNameIncomeM.value = categoryNameIncome
-        }
-        binding.imageView6.setOnClickListener {
-            nullallcategoryincome(binding)
-            binding.imageView6.setBackgroundResource(R.drawable.shape0)
-            categoryNameIncome = "Other"
-            categoryNameIncomeM.value = categoryNameIncome
-
-        }
-
+    private fun selectCategoryIncome(binding:FragmentNewIncomeBinding,category: Category) {
+        nullallcategoryincome(binding)
+        category.imageView.setBackgroundResource(R.drawable.shape0)
+        categoryNameIncome = category.name
+        categoryNameIncomeM.value = categoryNameIncome
     }
     fun SelectIncomeBankAccountButton(binding: FragmentNewIncomeBinding) {
         nullaccountall(binding)

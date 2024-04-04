@@ -54,7 +54,9 @@
             app:destination="@id/morePageFragment" />
     </fragment><![CDATA[
 
+
     />
+
 
 ]]>
 </navigation>

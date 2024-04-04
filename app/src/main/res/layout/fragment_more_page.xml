@@ -188,9 +188,10 @@
             android:layout_width="320dp"
             android:layout_height="48dp"
             android:layout_marginTop="48dp"
-            android:orientation="horizontal"
-            android:gravity="center"
             android:elevation="3dp"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
@@ -206,10 +207,10 @@
                 android:id="@+id/textView42"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
-                android:paddingStart="10dp"
                 android:layout_weight="4"
-                android:text="Log Out" />
+                android:paddingStart="10dp"
+                android:text="Log Out"
+                android:textSize="18dp" />
 
             <ImageView
                 android:id="@+id/imageView24"

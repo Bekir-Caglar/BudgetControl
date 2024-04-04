@@ -34,7 +34,7 @@ class NewIncomeFragmentViewModel @Inject constructor(var repo: BudgetDaoRepo): V
 
     }
     fun selectcategoryincome(binding: FragmentNewIncomeBinding) {
-        repo.selectcategoryincome(binding)
+        repo.selectCategoryIncome(binding)
     }
 
     fun addBankincomeList(bankincome:BankIncomeModel){

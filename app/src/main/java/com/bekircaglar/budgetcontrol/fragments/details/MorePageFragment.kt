@@ -7,15 +7,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavGraph
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.bekircaglar.budgetcontrol.R
 import com.bekircaglar.budgetcontrol.databinding.FragmentMorePageBinding
 import com.bekircaglar.budgetcontrol.fragments.details.MorePageFragmentDirections
+import com.bekircaglar.budgetcontrol.fragments.main.BudgetFragmentDirections
 import com.bekircaglar.budgetcontrol.model.UserData
 import com.bekircaglar.budgetcontrol.viewmodel.BudgetFragmentViewModel
 import com.bekircaglar.budgetcontrol.viewmodel.FragmentMorePageViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Base64
 
@@ -25,6 +33,8 @@ class MorePageFragment : Fragment() {
     private lateinit var binding : FragmentMorePageBinding
     private lateinit var viewModel: FragmentMorePageViewModel
     private lateinit var encodedImage: String
+    private lateinit var auth: FirebaseAuth
+    private lateinit var googleSignInClient : GoogleSignInClient
 
 
 
@@ -34,6 +44,10 @@ class MorePageFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(layoutInflater,R.layout.fragment_more_page,container,false)
         binding.morePageFragment = this
+
+
+
+
 
         viewModel.userDataList.observe(viewLifecycleOwner){
 
@@ -78,6 +92,7 @@ class MorePageFragment : Fragment() {
 
 
 
+
         return binding.root
     }
 
@@ -87,6 +102,9 @@ class MorePageFragment : Fragment() {
         viewModel = tempViewModel
 
     }
+
+
+
 
 
     fun goProfilePageButton(){

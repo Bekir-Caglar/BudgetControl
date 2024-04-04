@@ -54,7 +54,7 @@ class SignUpFragment : Fragment() {
                     val user = auth.currentUser
 
                     val username = firstname + " " + lastname
-                    val actionSignUpToHome = SignUpFragmentDirections.actionSignUpFragmentToNewUserProfile(username, userMail)
+                    val actionSignUpToHome = SignUpFragmentDirections.actionSignUpFragmentToNewUserProfile(username,userMail)
                     Navigation.findNavController(view).navigate(actionSignUpToHome)
 
 

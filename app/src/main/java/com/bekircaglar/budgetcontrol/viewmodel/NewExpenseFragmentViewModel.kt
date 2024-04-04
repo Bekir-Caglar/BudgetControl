@@ -44,7 +44,7 @@ class NewExpenseFragmentViewModel @Inject constructor(var repo: BudgetDaoRepo):V
 
     }
     fun selectCategoryMV(binding: FragmentNewExpenseBinding){
-        repo.selectCatagory(binding)
+        repo.selectCategory(binding)
     }
 
     fun addBankexpenseList(bankExpense :BankModel){

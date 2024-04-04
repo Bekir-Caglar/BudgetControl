@@ -144,9 +144,11 @@ private lateinit var googleSignInClient: GoogleSignInClient
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
 
+                        val action = LoginFragmentDirections.actionLoginFragmentToNewUserProfile(null,auth.currentUser?.email.toString())
+                        Navigation.findNavController(requireView()).navigate(action)
 
-                    val action = LoginFragmentDirections.actionLoginFragmentToBudgetFragment()
-                    Navigation.findNavController(requireView()).navigate(action)
+
+
 
                     updateUI(user)
                 } else {

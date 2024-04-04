@@ -25,6 +25,8 @@ class CashAdapter(val viewModel: BudgetFragmentViewModel,val contex:Context, val
     override fun onBindViewHolder(holder: CashHolder, position: Int) {
         val revcashlist = cashlist.reversed()
 
+        
+
         holder.binding.imageView7.setImageResource(revcashlist[position].expenseImg)
         holder.binding.catagoryText.text = revcashlist[position].expenseCatagory
         holder.binding.dateText.text = revcashlist[position].expenseDate
