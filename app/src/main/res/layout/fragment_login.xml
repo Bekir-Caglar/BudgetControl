@@ -9,12 +9,12 @@
 
     <TextView
         android:id="@+id/sign_in"
-        android:layout_width="99dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="104dp"
-        android:gravity="top"
+        android:gravity="center_horizontal"
         android:lineSpacingExtra="-2sp"
         android:text="Sign in"
         android:textStyle="bold"

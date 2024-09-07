@@ -7,7 +7,6 @@ import androidx.room.Query
 import androidx.room.Update
 import com.bekircaglar.budgetcontrol.model.AccountsMoney
 import com.bekircaglar.budgetcontrol.model.BankModel
-
 @Dao
 
 interface AccountsMoneyDao {

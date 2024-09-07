@@ -28,17 +28,17 @@ import com.bekircaglar.budgetcontrol.room.CashexpenseDao
 import com.bekircaglar.budgetcontrol.room.CashincomeDao
 import com.bekircaglar.budgetcontrol.room.UserDataDao
 import com.bekircaglar.budgetcontrol.viewmodel.BudgetFragmentViewModel
+import com.github.mikephil.charting.utils.Utils.init
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
-
+import javax.inject.Inject
 
 
 private lateinit var auth : FirebaseAuth
 var mail = FirebaseAuth.getInstance().currentUser?.email
-class BudgetDaoRepo(
+class BudgetDaoRepo @Inject constructor(
     var amdao: AccountsMoneyDao,
     var bedao:BankexpenseDao,
     var bidao:BankincomeDao,

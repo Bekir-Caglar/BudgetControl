@@ -21,15 +21,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 
-class AppModule {
-    @Provides
-    @Singleton
-    fun provideBudgetDaoRepo(uddao:UserDataDao,bedao: BankexpenseDao,bidao: BankincomeDao,cedao: CashexpenseDao,cidao: CashincomeDao,amdao:AccountsMoneyDao): BudgetDaoRepo{
-
-        return BudgetDaoRepo(amdao,bedao,bidao,cedao,cidao,uddao)
-    }
-
-
+ class AppModule {
     @Provides
     @Singleton
     fun provideCashexpenseDao(@ApplicationContext context: Context): CashexpenseDao{

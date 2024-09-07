@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import com.bekircaglar.budgetcontrol.R
 import com.bekircaglar.budgetcontrol.databinding.FragmentSignUpBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -45,8 +46,6 @@ class SignUpFragment : Fragment() {
             if (userMail.equals("")  ||  userPassword.equals("")){
                 Toast.makeText(requireContext(), "Enter Password And Email", Toast.LENGTH_LONG).show()
 
-
-
             }
             else{
                 auth.createUserWithEmailAndPassword(userMail,userPassword).addOnSuccessListener {
@@ -54,6 +53,11 @@ class SignUpFragment : Fragment() {
                     val user = auth.currentUser
 
                     val username = firstname + " " + lastname
+
+//                    val navHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.signUpFragment) as NavHostFragment
+//                    val navController = navHostFragment.navController
+//                    navController.navigate(R.id.action_signUpFragment_to_newUserProfile)
+
                     val actionSignUpToHome = SignUpFragmentDirections.actionSignUpFragmentToNewUserProfile(username,userMail)
                     Navigation.findNavController(view).navigate(actionSignUpToHome)
 

@@ -14,5 +14,6 @@
     <color name="dark_text_color">#006C52</color>
     <color name="number_color">#444745</color>
     <color name="info_text">#707974</color>
+    <color name="secondary_color">#27583B</color>
 
 </resources>

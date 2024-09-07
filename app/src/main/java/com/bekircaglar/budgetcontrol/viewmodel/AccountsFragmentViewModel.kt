@@ -8,5 +8,4 @@ import javax.inject.Inject
 @HiltViewModel
 class AccountsFragmentViewModel @Inject constructor(var repo: BudgetDaoRepo):ViewModel() {
 
-
 }
